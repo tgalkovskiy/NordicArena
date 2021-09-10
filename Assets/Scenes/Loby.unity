@@ -903,6 +903,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f82228c5a34007c47823b55200bf0f0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pvCache: {fileID: 0}
   _name: Player
   _nameRoom: Viking
