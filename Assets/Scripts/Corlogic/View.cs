@@ -7,6 +7,11 @@ public class View : MonoBehaviour
     private Presenter _playerPresenter;
     private void Awake()
     {
-        _playerPresenter = new Presenter();
+        _playerPresenter = new Presenter(GetComponent<CollisionDetected>(), this);
+    }
+
+    public void SetHp(int hp)
+    {
+        Debug.Log(hp);
     }
 }

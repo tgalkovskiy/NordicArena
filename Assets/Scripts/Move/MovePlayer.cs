@@ -31,8 +31,11 @@ public class MovePlayer : MonoBehaviour
             {
                 _animator.SetBool("Run", false);
             }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _animator.SetTrigger("Hit");
+            }
         }
-       
     }
     private void FixedUpdate()
     {

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using Photon.Pun;
 
@@ -9,7 +8,7 @@ public class LobyConector : MonoBehaviourPunCallbacks
     public string _nameRoom;
     private void Awake()
     {
-        PhotonNetwork.NickName = _name;
+        PhotonNetwork.NickName = SystemInfo.deviceName;
         PhotonNetwork.GameVersion = "1";
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.ConnectUsingSettings();
