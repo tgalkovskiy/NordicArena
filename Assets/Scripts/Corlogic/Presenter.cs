@@ -9,13 +9,8 @@ public class Presenter
     public Presenter(CollisionDetected _collisionDetected, View _view)
     {
         _modelPlayer = new Model(100);
-        _collisionDetected._setDamage += HitDamage;
         this._view = _view;
-        
-    }
-    private void HitDamage(int damage)
-    {
-        _modelPlayer.HitDamage(damage);
-        
+        _collisionDetected._setDamage += _modelPlayer.HitDamage;
+        _modelPlayer._hpUpdated += this._view.SetHp;
     }
 }
