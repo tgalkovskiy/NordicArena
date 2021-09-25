@@ -50,21 +50,21 @@ public class MovePlayer : MonoBehaviour
     }
     private void RotatePlayer(float x, float z)
     {
-        if (x < 0)
+        if (z > 0)
         {
-            transform.rotation = Quaternion.Euler(0, -90, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         if (x > 0)
         {
-            transform.rotation = Quaternion.Euler(0, 90, 0);
+             transform.rotation = Quaternion.Euler(0, 90, 0);
         }
         if (z < 0)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-        if (z > 0)
+        if (x < 0 )
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 270, 0);
         }
     }
 }
