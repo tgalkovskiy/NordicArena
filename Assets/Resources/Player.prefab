@@ -434,6 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 361d7484ca346be4f984feac8f8055c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ID: 0
 --- !u!1 &573387113001788027
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,6 +1011,7 @@ GameObject:
   - component: {fileID: 6316217507260599330}
   - component: {fileID: 8496726389889736472}
   - component: {fileID: 2571993434769372414}
+  - component: {fileID: 1168286065149546413}
   m_Layer: 0
   m_Name: Item_Axe
   m_TagString: Weapon
@@ -1109,6 +1111,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1168286065149546413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854604599891014650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a73e9246942a3341a063961e2792293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2354207353710136205
 GameObject:
   m_ObjectHideFlags: 0

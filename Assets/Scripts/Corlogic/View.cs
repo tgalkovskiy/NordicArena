@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class View : MonoBehaviour
 {
+    public int _ID;
     private Presenter _playerPresenter;
     private void Awake()
     {
