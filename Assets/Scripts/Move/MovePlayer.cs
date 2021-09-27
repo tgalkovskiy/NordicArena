@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Unity.Mathematics;
 
 [RequireComponent(typeof(Rigidbody))]
 public class MovePlayer : MonoBehaviour
@@ -12,6 +13,7 @@ public class MovePlayer : MonoBehaviour
     private PhotonView _photonView;
     float x;
     float z;
+    private float mouseX;
     private void Awake()
     {
         _plyerRb = GetComponent<Rigidbody>();
@@ -23,6 +25,14 @@ public class MovePlayer : MonoBehaviour
         {
             x = Input.GetAxis("Horizontal");
             z = Input.GetAxis("Vertical");
+            if (Input.GetMouseButtonDown(1))
+            {
+                mouseX = Input.mousePosition.normalized.x;
+            }
+            if (Input.GetMouseButton(1))
+            {
+                RotatePlayer(Input.mousePosition.normalized.x);
+            }
             if(x!=0 || z != 0)
             {
                 _animator.SetBool("Run", true);
@@ -39,32 +49,30 @@ public class MovePlayer : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (_photonView.IsMine)
+        if(_photonView.IsMine)
         {
-            RotatePlayer(x, z);
             if (_plyerRb.velocity.magnitude < 5)
             {
-                _plyerRb.AddForce(new Vector3(x, 0, z) * _speed/Time.fixedDeltaTime);
+                _plyerRb.AddRelativeForce(new Vector3(x, 0, z) * _speed/Time.fixedDeltaTime);
             }
+            
+            
         } 
     }
-    private void RotatePlayer(float x, float z)
+    private void RotatePlayer(float X)
     {
-        if (z > 0)
+        if (mouseX != X)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            Debug.Log(X);
+            if (X < mouseX)
+            {
+                transform.rotation *= quaternion.Euler(0,X*Time.deltaTime,0);
+            }
+            if (X > mouseX)
+            {
+                transform.rotation *= quaternion.Euler(0,-X*Time.deltaTime,0);
+            }
         }
-        if (x > 0)
-        {
-             transform.rotation = Quaternion.Euler(0, 90, 0);
-        }
-        if (z < 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-        if (x < 0 )
-        {
-            transform.rotation = Quaternion.Euler(0, 270, 0);
-        }
+       
     }
 }
