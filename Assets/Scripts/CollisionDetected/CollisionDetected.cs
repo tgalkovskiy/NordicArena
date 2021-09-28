@@ -14,10 +14,10 @@ public class CollisionDetected : MonoBehaviour
     public Action<int> _setDamage; 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject?.GetComponent<DamageControl>())
+        if (other.gameObject?.GetComponentInParent<View>()?._ID != _ID)
         {
-            if(_ID!=other.gameObject?.GetComponent<DamageControl>()._ID)
             _setDamage.Invoke(10);
         }
+ 
     }
 }

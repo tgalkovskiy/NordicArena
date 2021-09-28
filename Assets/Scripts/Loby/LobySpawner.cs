@@ -14,7 +14,10 @@ public class LobySpawner : MonoBehaviourPunCallbacks
         player.GetComponent<View>()._ID = player.GetComponent<PhotonView>().ViewID;
         _cinemachine.Follow = player.transform;
         _cinemachine.LookAt = player.transform;
+        
     }
-
-
+    public override void OnJoinedRoom()
+    {
+        Debug.Log(1);
+    }
 }

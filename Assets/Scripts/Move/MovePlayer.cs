@@ -63,7 +63,7 @@ public class MovePlayer : MonoBehaviour
     {
         if (mouseX != X)
         {
-            Debug.Log(X);
+           
             if (X < mouseX)
             {
                 transform.rotation *= quaternion.Euler(0,X*Time.deltaTime,0);
