@@ -9,10 +9,12 @@ public class MovePlayer : MonoBehaviour
 {
     public float _speed;
     public Animator _animator;
+    public Animation _animation;
     private Rigidbody _plyerRb;
     private PhotonView _photonView;
     float x;
     float z;
+    private bool _attackBlocked;
     private float mouseX;
     private void Awake()
     {
@@ -33,7 +35,7 @@ public class MovePlayer : MonoBehaviour
             {
                 RotatePlayer(Input.mousePosition.normalized.x);
             }
-            if(x!=0 || z != 0)
+            if (x != 0 || z != 0)
             {
                 _animator.SetBool("Run", true);
             }
@@ -43,36 +45,57 @@ public class MovePlayer : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _animator.SetTrigger("Hit");
+                if (!_attackBlocked)
+                { 
+                    _animator.SetTrigger("Hit");
+                    _attackBlocked = true;
+                    StartCoroutine(AttackDelay());
+                }
+
+                
+
+
             }
         }
     }
     private void FixedUpdate()
     {
-        if(_photonView.IsMine)
+        if (_photonView.IsMine)
         {
             if (_plyerRb.velocity.magnitude < 5)
             {
-                _plyerRb.AddRelativeForce(new Vector3(x, 0, z) * _speed/Time.fixedDeltaTime);
+                _plyerRb.AddRelativeForce(new Vector3(x, 0, z) * _speed / Time.fixedDeltaTime);
             }
-            
-            
-        } 
+
+
+        }
     }
     private void RotatePlayer(float X)
     {
         if (mouseX != X)
         {
-           
+
             if (X < mouseX)
             {
-                transform.rotation *= quaternion.Euler(0,X*Time.deltaTime,0);
+                transform.rotation *= quaternion.Euler(0, X * Time.deltaTime, 0);
             }
             if (X > mouseX)
             {
-                transform.rotation *= quaternion.Euler(0,-X*Time.deltaTime,0);
+                transform.rotation *= quaternion.Euler(0, -X * Time.deltaTime, 0);
             }
         }
-       
+
     }
+
+    IEnumerator AttackDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        _attackBlocked = false;
+
+    }
+        
+
+
+       
+
 }
