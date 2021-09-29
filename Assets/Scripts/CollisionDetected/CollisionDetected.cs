@@ -14,6 +14,10 @@ public class CollisionDetected : MonoBehaviour
     public Action<int> _setDamage; 
     private void OnCollisionEnter(Collision other)
     {
+        if (!other.gameObject?.GetComponent<DamageControl>())
+        {
+            return;
+        }
         if (other.gameObject?.GetComponentInParent<View>()?._ID != _ID)
         {
             _setDamage.Invoke(10);
