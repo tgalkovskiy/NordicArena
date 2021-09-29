@@ -7,7 +7,9 @@ using Unity.Mathematics;
 [RequireComponent(typeof(Rigidbody))]
 public class MovePlayer : MonoBehaviour
 {
+    public string Message;
     public float _speed;
+    public float _forceJump;
     public Animator _animator;
     public Animation _animation;
     private Rigidbody _plyerRb;
@@ -15,7 +17,8 @@ public class MovePlayer : MonoBehaviour
     float x;
     float z;
     private bool _attackBlocked;
-    private float mouseX;
+    private float _mouseX;
+    private bool _isJump = false;
     private void Awake()
     {
         _plyerRb = GetComponent<Rigidbody>();
@@ -29,7 +32,7 @@ public class MovePlayer : MonoBehaviour
             z = Input.GetAxis("Vertical");
             if (Input.GetMouseButtonDown(1))
             {
-                mouseX = Input.mousePosition.normalized.x;
+                _mouseX = Input.mousePosition.normalized.x;
             }
             if (Input.GetMouseButton(1))
             {
@@ -43,7 +46,7 @@ public class MovePlayer : MonoBehaviour
             {
                 _animator.SetBool("Run", false);
             }
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 if (!_attackBlocked)
                 { 
@@ -51,10 +54,15 @@ public class MovePlayer : MonoBehaviour
                     _attackBlocked = true;
                     StartCoroutine(AttackDelay());
                 }
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _isJump = !_isJump;
+            }
 
-                
-
-
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                SendMessage(Message);
             }
         }
     }
@@ -66,35 +74,43 @@ public class MovePlayer : MonoBehaviour
             {
                 _plyerRb.AddRelativeForce(new Vector3(x, 0, z) * _speed / Time.fixedDeltaTime);
             }
-
-
+            if (_isJump)
+            {
+                _plyerRb.AddForce(Vector3.up*_forceJump / Time.fixedDeltaTime);
+                _isJump = !_isJump;
+            }
         }
     }
     private void RotatePlayer(float X)
     {
-        if (mouseX != X)
+        if (_mouseX != X)
         {
-
-            if (X < mouseX)
-            {
-                transform.rotation *= quaternion.Euler(0, X * Time.deltaTime, 0);
-            }
-            if (X > mouseX)
+            if (X < _mouseX)
             {
                 transform.rotation *= quaternion.Euler(0, -X * Time.deltaTime, 0);
             }
+            if (X > _mouseX)
+            {
+                transform.rotation *= quaternion.Euler(0, X * Time.deltaTime, 0);
+            }
         }
-
     }
-
     IEnumerator AttackDelay()
     {
         yield return new WaitForSeconds(1f);
         _attackBlocked = false;
 
     }
-        
 
+    private void SendMessage(string message)
+    {
+        _photonView.RPC("GetMessage", RpcTarget.All, message);
+    }
+    [PunRPC]
+    public void GetMessage(string message)
+    {
+        Debug.Log(message);
+    }
 
        
 
