@@ -15,9 +15,9 @@ public class LobySpawner : MonoBehaviourPunCallbacks
     {
        var player = PhotonNetwork.Instantiate(_prefab.name, new Vector3(Random.Range(-5, 5), 1, Random.Range(-5, 5)), Quaternion.identity);
         player.GetComponent<View>()._ID = player.GetComponent<PhotonView>().ViewID;
-        player.GetComponent<View>()._Hp = _hpSlider;
+        player.GetComponent<View>()._Hp = _hpSlider; 
         _cinemachine.Follow = player.transform;
-        _cinemachine.LookAt = player.transform;
+       _cinemachine.LookAt = player.transform;
     }
     public override void OnJoinedRoom()
     {
