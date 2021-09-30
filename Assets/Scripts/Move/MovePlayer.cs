@@ -7,18 +7,16 @@ using Unity.Mathematics;
 [RequireComponent(typeof(Rigidbody))]
 public class MovePlayer : MonoBehaviour
 {
-    public string Message;
+    [SerializeField]private AnimationController _AnimationController;
     public float _speed;
     public float _forceJump;
-    public Animator _animator;
-    public Animation _animation;
     private Rigidbody _plyerRb;
     private PhotonView _photonView;
     float x;
     float z;
-    private bool _attackBlocked;
     private float _mouseX;
     private bool _isJump = false;
+    private Vector3 _velocity;
     private void Awake()
     {
         _plyerRb = GetComponent<Rigidbody>();
@@ -28,8 +26,7 @@ public class MovePlayer : MonoBehaviour
     {
         if (_photonView.IsMine)
         {
-            x = Input.GetAxis("Horizontal");
-            z = Input.GetAxis("Vertical");
+            _velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             if (Input.GetMouseButtonDown(1))
             {
                 _mouseX = Input.mousePosition.normalized.x;
@@ -38,31 +35,31 @@ public class MovePlayer : MonoBehaviour
             {
                 RotatePlayer(Input.mousePosition.normalized.x);
             }
-            if (x != 0 || z != 0)
+            if (_velocity.x != 0 || _velocity.z != 0)
             {
-                _animator.SetBool("Run", true);
+                _AnimationController.MoveAnimation(_velocity);
             }
             else
             {
-                _animator.SetBool("Run", false);
+                _AnimationController.MoveAnimation(Vector3.zero);
             }
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (!_attackBlocked)
+                _AnimationController.AttackVariant();
+                /*if (!_attackBlocked)
                 { 
                     _animator.SetTrigger("Hit");
                     _attackBlocked = true;
                     StartCoroutine(AttackDelay());
-                }
+                }*/
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 _isJump = !_isJump;
             }
-
             if (Input.GetKeyDown(KeyCode.F))
             {
-                SendMessage(Message);
+                
             }
         }
     }
@@ -72,12 +69,13 @@ public class MovePlayer : MonoBehaviour
         {
             if (_plyerRb.velocity.magnitude < 5)
             {
-                _plyerRb.AddRelativeForce(new Vector3(x, 0, z) * _speed / Time.fixedDeltaTime);
+                _plyerRb.AddRelativeForce(_velocity * _speed / Time.fixedDeltaTime);
             }
             if (_isJump)
             {
-                _plyerRb.AddForce(Vector3.up*_forceJump / Time.fixedDeltaTime);
                 _isJump = !_isJump;
+                _AnimationController.JumpAnimation();
+                StartCoroutine(JumpDelay());
             }
         }
     }
@@ -95,22 +93,14 @@ public class MovePlayer : MonoBehaviour
             }
         }
     }
-    IEnumerator AttackDelay()
+    
+    IEnumerator JumpDelay()
     {
-        yield return new WaitForSeconds(1f);
-        _attackBlocked = false;
-
+        yield return new WaitForSeconds(0.3f);
+        _plyerRb.AddForce(Vector3.up*_forceJump / Time.fixedDeltaTime);
     }
 
-    private void SendMessage(string message)
-    {
-        _photonView.RPC("GetMessage", RpcTarget.All, message);
-    }
-    [PunRPC]
-    public void GetMessage(string message)
-    {
-        Debug.Log(message);
-    }
+    
 
        
 
