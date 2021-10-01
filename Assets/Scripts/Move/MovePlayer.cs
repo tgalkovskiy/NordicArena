@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Unity.Mathematics;
 
 [RequireComponent(typeof(Rigidbody))]
 public class MovePlayer : MonoBehaviour
@@ -85,11 +84,11 @@ public class MovePlayer : MonoBehaviour
         {
             if (X < _mouseX)
             {
-                transform.rotation *= quaternion.Euler(0, -X * Time.deltaTime, 0);
+                transform.rotation *= Quaternion.Euler(0, -X * Time.deltaTime*10, 0);
             }
             if (X > _mouseX)
             {
-                transform.rotation *= quaternion.Euler(0, X * Time.deltaTime, 0);
+                transform.rotation *= Quaternion.Euler(0, X * Time.deltaTime*10, 0);
             }
         }
     }
