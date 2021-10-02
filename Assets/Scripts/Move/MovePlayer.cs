@@ -13,7 +13,6 @@ public class MovePlayer : MonoBehaviour
     private PhotonView _photonView;
     float x;
     float z;
-    private float _mouseX;
     private bool _isJump = false;
     private Vector3 _velocity;
     private void Awake()
@@ -26,14 +25,6 @@ public class MovePlayer : MonoBehaviour
         if (_photonView.IsMine)
         {
             _velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            if (Input.GetMouseButtonDown(1))
-            {
-                _mouseX = Input.mousePosition.normalized.x;
-            }
-            if (Input.GetMouseButton(1))
-            {
-                RotatePlayer(Input.mousePosition.normalized.x);
-            }
             if (_velocity.x != 0 || _velocity.z != 0)
             {
                 _AnimationController.MoveAnimation(_velocity);
@@ -42,24 +33,39 @@ public class MovePlayer : MonoBehaviour
             {
                 _AnimationController.MoveAnimation(Vector3.zero);
             }
+            if (Input.GetKey(KeyCode.Q))
+            {
+                RotatePlayer(-1);
+            }
+            if (Input.GetKey(KeyCode.E))
+            {
+                RotatePlayer(1);
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                _AnimationController.ShowUnShowWeapon();
+            }
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                _AnimationController.AttackVariant();
-                /*if (!_attackBlocked)
-                { 
-                    _animator.SetTrigger("Hit");
-                    _attackBlocked = true;
-                    StartCoroutine(AttackDelay());
-                }*/
+                _AnimationController.AttackVariant(0);
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                _AnimationController.AttackVariant(1);
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse2))
+            {
+                _AnimationController.AttackVariant(2);
+            }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                _AnimationController.AttackVariant(3);
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 _isJump = !_isJump;
             }
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                
-            }
+            
         }
     }
     private void FixedUpdate()
@@ -80,17 +86,7 @@ public class MovePlayer : MonoBehaviour
     }
     private void RotatePlayer(float X)
     {
-        if (_mouseX != X)
-        {
-            if (X < _mouseX)
-            {
-                transform.rotation *= Quaternion.Euler(0, -X * Time.deltaTime*10, 0);
-            }
-            if (X > _mouseX)
-            {
-                transform.rotation *= Quaternion.Euler(0, X * Time.deltaTime*10, 0);
-            }
-        }
+        transform.rotation *= Quaternion.Euler(0, X * Time.deltaTime*50, 0);
     }
     
     IEnumerator JumpDelay()

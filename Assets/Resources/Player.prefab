@@ -1021,7 +1021,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7108228715894162238
 Transform:
   m_ObjectHideFlags: 0
@@ -1255,6 +1255,87 @@ Transform:
   m_Father: {fileID: 5000634159194157997}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -4.3926907, y: 4.186776, z: 2.7284672}
+--- !u!1 &2619190566035836775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7327574049982363639}
+  - component: {fileID: 1691820636365561240}
+  - component: {fileID: 6144001073852631868}
+  m_Layer: 0
+  m_Name: Item_Shield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7327574049982363639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619190566035836775}
+  m_LocalRotation: {x: 0.09366816, y: -0.73890865, z: -0.6662445, w: 0.036858127}
+  m_LocalPosition: {x: -38.2, y: 1.6, z: -3.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5229570661383554694}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -77.873, y: 238.58, z: -63.21}
+--- !u!33 &1691820636365561240
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619190566035836775}
+  m_Mesh: {fileID: 4300030, guid: a177b0e6ff26a894180468c168e802cc, type: 3}
+--- !u!23 &6144001073852631868
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619190566035836775}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: fae9a746025d20b4c89e098e3ec38c7a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2661249606691412205
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,6 +2008,27 @@ MonoBehaviour:
   - Type: 1
     SynchronizeType: 1
     Name: Z
+  - Type: 9
+    SynchronizeType: 0
+    Name: Jump
+  - Type: 9
+    SynchronizeType: 1
+    Name: Combo
+  - Type: 9
+    SynchronizeType: 1
+    Name: Combo2
+  - Type: 9
+    SynchronizeType: 1
+    Name: OnArm
+  - Type: 9
+    SynchronizeType: 1
+    Name: Disarm
+  - Type: 9
+    SynchronizeType: 0
+    Name: Combo3
+  - Type: 9
+    SynchronizeType: 0
+    Name: Combo4
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -1942,6 +2044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08be3792b200ce84bafc91b529bb7dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weapon: {fileID: 1854604599891014650}
   _collider: {fileID: 8496726389889736472}
 --- !u!1 &4843015459900669774
 GameObject:
@@ -3022,6 +3125,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 640570152974811845}
+  - {fileID: 7327574049982363639}
   m_Father: {fileID: 1948883901691556712}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0.12608601, y: 8.875204, z: 3.7511764}
