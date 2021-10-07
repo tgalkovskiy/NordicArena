@@ -11,14 +11,17 @@ public class MovePlayer : MonoBehaviour
     public float _forceJump;
     private Rigidbody _plyerRb;
     private PhotonView _photonView;
+    private CapsuleCollider _collider;
     float x;
     float z;
     private bool _isJump = false;
+    private bool _isJumpInTransition = false;
     private Vector3 _velocity;
     private void Awake()
     {
         _plyerRb = GetComponent<Rigidbody>();
         _photonView = GetComponent<PhotonView>();
+        _collider = GetComponent<CapsuleCollider>();
     }
     private void Update()
     {
@@ -63,9 +66,8 @@ public class MovePlayer : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _isJump = !_isJump;
+                _isJump = IsGrounded() && !_isJump && !_isJumpInTransition;
             }
-            
         }
     }
     private void FixedUpdate()
@@ -76,11 +78,15 @@ public class MovePlayer : MonoBehaviour
             {
                 _plyerRb.AddRelativeForce(_velocity * _speed / Time.fixedDeltaTime);
             }
-            if (_isJump)
+            if (_isJump && IsGrounded())
             {
-                _isJump = !_isJump;
+                _isJumpInTransition = true;
                 _AnimationController.JumpAnimation();
+                _isJump = false;
                 StartCoroutine(JumpDelay());
+            }
+            if (!IsGrounded()) {
+                _isJumpInTransition = false;
             }
         }
     }
@@ -88,6 +94,8 @@ public class MovePlayer : MonoBehaviour
     {
         transform.rotation *= Quaternion.Euler(0, X * Time.deltaTime*50, 0);
     }
+
+    private bool IsGrounded() => Physics.Raycast(transform.position, Vector3.down, .1f);
     
     IEnumerator JumpDelay()
     {
