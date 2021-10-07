@@ -11,6 +11,7 @@ public class LobySpawner : MonoBehaviourPunCallbacks
     [SerializeField] private Slider _hpSlider = default;
     [SerializeField] private GameObject _prefab = default;
     private Dictionary<int, Photon.Realtime.Player> Players;
+    
     private void Start()
     {
        var player = PhotonNetwork.Instantiate(_prefab.name, new Vector3(Random.Range(-5, 5), 1, Random.Range(-5, 5)), Quaternion.identity);
@@ -18,11 +19,13 @@ public class LobySpawner : MonoBehaviourPunCallbacks
         player.GetComponent<View>()._Hp = _hpSlider;
         _cinemachine.Follow = player.transform;
         _cinemachine.LookAt = player.transform;
+        Messenger._photonView = player.GetComponent<PhotonView>();
     }
     public override void OnJoinedRoom()
     {
         Players = PhotonNetwork.CurrentRoom.Players;
-        Debug.Log(Players.Count);
+      
+        Messenger.SendMessage("Players:" + Players.Count);
     }
     public override void OnLeftRoom()
     {
