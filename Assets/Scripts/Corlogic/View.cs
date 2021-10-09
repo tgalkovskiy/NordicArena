@@ -12,6 +12,7 @@ public class View : MonoBehaviourPunCallbacks
     private PhotonView _photonView;
     private void Awake()
     {
+        Application.targetFrameRate = 90;
         _photonView = GetComponent<PhotonView>();
         _playerPresenter = new Presenter(GetComponent<CollisionDetected>(), this);
     }
