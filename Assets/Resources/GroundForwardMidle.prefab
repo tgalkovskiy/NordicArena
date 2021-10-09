@@ -150,10 +150,11 @@ MonoBehaviour:
   _TypeBlock: 1
   posSpawn: {fileID: 7873493207929792182}
   prefabs:
-  - {fileID: 2700605426388263897, guid: de0d987f94fda5646b805e71e44ea4be, type: 3}
-  - {fileID: 2087626018534737486, guid: c00e7e7ad49b5d947841bb0c46aa4470, type: 3}
-  - {fileID: 5864937664969936873, guid: f980617ef390a364d9b8b5adf83d45ca, type: 3}
+  - {fileID: 2700605426388263897, guid: ed348de0502ac4030b80e8d4f767e1eb, type: 3}
+  - {fileID: 2087626018534737486, guid: 7262f0205d31345cda1ef1991af156c1, type: 3}
+  - {fileID: 5864937664969936873, guid: 604d81ccb8b164b6fbe9b62bfe3d76e1, type: 3}
   - {fileID: 3695236206444099664}
+  - {fileID: 4996054710397645306, guid: e7674d0444ef3403ab671b7062a33f9d, type: 3}
 --- !u!114 &8369941003929136519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +173,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -2990148568358810813}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
