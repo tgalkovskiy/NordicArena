@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 7521199823937498210}
   - component: {fileID: 4355398241409864045}
   - component: {fileID: 256769868676108280}
+  - component: {fileID: 793448872890352447}
   m_Layer: 0
   m_Name: TurnLeft
   m_TagString: Untagged
@@ -59,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 2700605426388263897}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children:
   - {fileID: 8896337458502139199}
   - {fileID: 2635145019197700414}
@@ -146,6 +147,28 @@ MonoBehaviour:
   posSpawn: {fileID: 8896337458502139199}
   prefabs:
   - {fileID: 4991540914273742686, guid: dd0b58c34781bbb42b3769d57e07f1cd, type: 3}
+--- !u!114 &793448872890352447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2700605426388263897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &6309769795426546294
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class LobySpawner : MonoBehaviourPunCallbacks
     private Dictionary<int, Photon.Realtime.Player> Players;
     private void Start()
     {
-       var player = PhotonNetwork.Instantiate(_prefab.name, new Vector3(Random.Range(-5, 5), 1, Random.Range(-5, 5)), Quaternion.identity);
+       var player = PhotonNetwork.Instantiate(_prefab.name, new Vector3(Random.Range(-1, 1), 1, Random.Range(-1, 1)), Quaternion.identity);
         player.GetComponent<View>()._ID = player.GetComponent<PhotonView>().ViewID;
         player.GetComponent<View>()._Hp = _hpSlider;
         _cinemachine.Follow = player.transform;

@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 9102563161430046699}
   - component: {fileID: 3045308611477031652}
   - component: {fileID: 1558910976309908593}
+  - component: {fileID: 8369941003929136519}
   m_Layer: 0
   m_Name: GroundForwardMidle
   m_TagString: Untagged
@@ -59,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 3695236206444099664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children:
   - {fileID: 6598266444650523111}
   - {fileID: 7873493207929792182}
@@ -152,6 +153,28 @@ MonoBehaviour:
   - {fileID: 2087626018534737486, guid: c00e7e7ad49b5d947841bb0c46aa4470, type: 3}
   - {fileID: 5864937664969936873, guid: f980617ef390a364d9b8b5adf83d45ca, type: 3}
   - {fileID: 3695236206444099664}
+--- !u!114 &8369941003929136519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695236206444099664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &3775161811577020809
 PrefabInstance:
   m_ObjectHideFlags: 0
