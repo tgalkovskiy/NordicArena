@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8614877279085683656}
   - component: {fileID: 5819700759386539001}
   - component: {fileID: -9028878373670584538}
+  - component: {fileID: 1311028798328126692}
   m_Layer: 0
   m_Name: GroundForward
   m_TagString: Untagged
@@ -116,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TypeBlock: 1
   posSpawn: {fileID: 1110181428333613327}
+  posSpawnObj: {fileID: 0}
   prefabs:
   - {fileID: 2700605426388263897, guid: ed348de0502ac4030b80e8d4f767e1eb, type: 3}
   - {fileID: 2087626018534737486, guid: 7262f0205d31345cda1ef1991af156c1, type: 3}
@@ -161,6 +163,21 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
+--- !u!114 &1311028798328126692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5864937664969936873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 575b166b1a11e4bed843691ac05cfcb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trap: {fileID: 3942144702280486042, guid: 620d506ad52dd4f7eb0dd1e7314bbe63, type: 3}
+  enemy: {fileID: 5465764242644820726, guid: 28028c955e75242c6b41929d92521319, type: 3}
+  loot: {fileID: 3262619346224536390, guid: 6e9531ad6d0824a80b415437e7f42c47, type: 3}
 --- !u!1 &7076328559067346448
 GameObject:
   m_ObjectHideFlags: 0

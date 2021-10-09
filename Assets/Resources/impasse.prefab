@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 8300274177044348328}
   - component: {fileID: 1708838599584803233}
   - component: {fileID: -2226650181191935621}
+  - component: {fileID: 4216196308592963174}
   m_Layer: 0
   m_Name: impasse
   m_TagString: Untagged
@@ -212,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TypeBlock: 0
   posSpawn: {fileID: 852981872100151151}
+  posSpawnObj: {fileID: 0}
   prefabs:
   - {fileID: 5864937664969936873, guid: 604d81ccb8b164b6fbe9b62bfe3d76e1, type: 3}
   - {fileID: 2700605426388263897, guid: ed348de0502ac4030b80e8d4f767e1eb, type: 3}
@@ -257,6 +259,21 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
+--- !u!114 &4216196308592963174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6186327292004307337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 575b166b1a11e4bed843691ac05cfcb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trap: {fileID: 3942144702280486042, guid: 620d506ad52dd4f7eb0dd1e7314bbe63, type: 3}
+  enemy: {fileID: 5465764242644820726, guid: 28028c955e75242c6b41929d92521319, type: 3}
+  loot: {fileID: 3262619346224536390, guid: 6e9531ad6d0824a80b415437e7f42c47, type: 3}
 --- !u!1 &6704707693735638038
 GameObject:
   m_ObjectHideFlags: 0

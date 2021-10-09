@@ -5,12 +5,18 @@ using UnityEngine;
 using Photon.Pun;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(ObjectCreater))]
 public class ItemBlock : MonoBehaviourPunCallbacks
 {
     public TypeBlock _TypeBlock;
     public Transform posSpawn;
+    public Transform posSpawnObj;
     public GameObject[] prefabs;
-
+    private ObjectCreater _objectCreater;
+    private void Awake()
+    {
+        _objectCreater = GetComponent<ObjectCreater>();
+    }
     IEnumerator Start()
     {
         if (PhotonNetwork.IsMasterClient)
@@ -22,6 +28,14 @@ public class ItemBlock : MonoBehaviourPunCallbacks
                 var block=  PhotonNetwork.Instantiate(prefabs[indexBlock].name, posSpawn.position, prefabs[indexBlock].transform.rotation);
                 block.name = prefabs[indexBlock].name;
                 LevelCreator._sizeMap += 1;
+                if (posSpawnObj != null)
+                {
+                    _objectCreater.CreateObj(new TypeObject()
+                    {
+                        _contentType = ContentType.loot, _possition = posSpawnObj.position,
+                        _ratation = posSpawnObj.rotation.eulerAngles
+                    });
+                }
            }
         }
         

@@ -15,15 +15,15 @@ public class ObjectCreater : MonoBehaviourPunCallbacks
         {
             if (_typeObject._contentType == ContentType.enemie)
             {
-                //PhotonNetwork.Instantiate(enemy.name, _typeObject._possition);
+                PhotonNetwork.Instantiate(enemy.name, _typeObject._possition, Quaternion.Euler(_typeObject._ratation));
             }
             if (_typeObject._contentType == ContentType.loot)
             {
-                //PhotonNetwork.Instantiate()
+                PhotonNetwork.Instantiate(loot.name, _typeObject._possition, Quaternion.Euler(_typeObject._ratation));
             }
             if (_typeObject._contentType == ContentType.trap)
             {
-                //PhotonNetwork.Instantiate()
+                PhotonNetwork.Instantiate(trap.name, _typeObject._possition, Quaternion.Euler(_typeObject._ratation));
             }
         }
     }

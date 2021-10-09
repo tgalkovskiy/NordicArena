@@ -116,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TypeBlock: 2
   posSpawn: {fileID: 4824733260849895592}
+  posSpawnObj: {fileID: 0}
   prefabs:
   - {fileID: 2231746843264303459, guid: f6efa90e105a34547b83998d0836ce60, type: 3}
 --- !u!114 &3509706511286297707
