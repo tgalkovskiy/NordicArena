@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4146550689633763228}
   - component: {fileID: 462393740135981321}
   - component: {fileID: 5173548547037868083}
+  - component: {fileID: 6362658463016382709}
   m_Layer: 0
   m_Name: GroundForwardLeftMidle
   m_TagString: Untagged
@@ -170,10 +171,27 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 6362658463016382709}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &6362658463016382709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2342012742463950120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1
+  m_UseLocal: 1
 --- !u!1001 &2548763546933625114
 PrefabInstance:
   m_ObjectHideFlags: 0

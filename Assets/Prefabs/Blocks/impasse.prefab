@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 5535273762913346365}
   - component: {fileID: 8300274177044348328}
   - component: {fileID: 1708838599584803233}
+  - component: {fileID: -2226650181191935621}
   m_Layer: 0
   m_Name: impasse
   m_TagString: Untagged
@@ -235,10 +236,27 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -2226650181191935621}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-2226650181191935621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6186327292004307337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1
+  m_UseLocal: 1
 --- !u!1 &6704707693735638038
 GameObject:
   m_ObjectHideFlags: 0
