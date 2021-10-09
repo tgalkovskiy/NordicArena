@@ -19,7 +19,7 @@ public class ItemBlock : MonoBehaviourPunCallbacks
            if (LevelCreator._sizeMap < 100)
            {
             int indexBlock = Random.Range(0, prefabs.Length);
-            Instantiate(prefabs[indexBlock], posSpawn.position, prefabs[indexBlock].transform.rotation);
+            PhotonNetwork.Instantiate(prefabs[indexBlock].name, posSpawn.position, prefabs[indexBlock].transform.rotation);
             LevelCreator._sizeMap += 1;
            }
         }
