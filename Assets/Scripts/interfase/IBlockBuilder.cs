@@ -1,10 +1,10 @@
 
 using System.Collections;
+using UnityEngine;
 
-public interface IBlockBuilder
+public interface IBlockBuilder 
 {
-    
-    public void BuilderBlocks();
+    public void BuilderBlocks(GameObject gameObject, Transform pos);
 
     public void BuilderEnemy();
 

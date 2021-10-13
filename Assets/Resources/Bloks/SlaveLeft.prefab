@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 6713932192762576711}
   - component: {fileID: 6789450613549586479}
   - component: {fileID: 916438713937310018}
+  - component: {fileID: -6450631899321276755}
   m_Layer: 0
   m_Name: SlaveLeft
   m_TagString: Untagged
@@ -158,15 +159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81b57d93311a2147904dba0a818f582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeBlock: 0
-  posSpawn:
-  - {fileID: 8338641440008563865}
-  - {fileID: 1826981256368495509}
-  posSpawnObj: {fileID: 7702353273034379862}
-  prefabs:
-  - {fileID: 2908792260068559647, guid: 0aa9d56de0f271242b817805667bd64d, type: 3}
-  - {fileID: 4991540914273742686, guid: 76ca0522eb1b0463a9990e60ec32a8cc, type: 3}
-  prefabSlave: {fileID: 2342012742463950120, guid: 69521d76130504d368924fe7d71ec829, type: 3}
 --- !u!114 &6713932192762576711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +213,28 @@ MonoBehaviour:
   trap: {fileID: 3942144702280486042, guid: 620d506ad52dd4f7eb0dd1e7314bbe63, type: 3}
   enemy: {fileID: 5465764242644820726, guid: 28028c955e75242c6b41929d92521319, type: 3}
   loot: {fileID: 3262619346224536390, guid: 6e9531ad6d0824a80b415437e7f42c47, type: 3}
+--- !u!114 &-6450631899321276755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3293424003835228799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &5440826343960821384
 GameObject:
   m_ObjectHideFlags: 0

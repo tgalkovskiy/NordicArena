@@ -12,12 +12,10 @@ GameObject:
   - component: {fileID: 7364073677320797597}
   - component: {fileID: 603294558088224997}
   - component: {fileID: 6651400826492853738}
-  - component: {fileID: 7183176008339981183}
-  - component: {fileID: -1043703737450506378}
-  - component: {fileID: -172449198249325338}
-  - component: {fileID: 4836863611282327190}
+  - component: {fileID: 3065031381245207419}
+  - component: {fileID: -3425984137013732380}
   m_Layer: 0
-  m_Name: GroundForwardLeft
+  m_Name: ForwardLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +101,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 542f964f9d702f74d949482dfe0e0e8f, type: 3}
---- !u!114 &7183176008339981183
+--- !u!114 &3065031381245207419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,19 +110,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4991540914273742686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d81b57d93311a2147904dba0a818f582, type: 3}
+  m_Script: {fileID: 11500000, guid: cd105ab76a1401641bb8faf6566faaa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeBlock: 0
-  posSpawn:
-  - {fileID: 1966346361175896504}
-  posSpawnObj: {fileID: 0}
-  prefabs:
-  - {fileID: 4991540914273742686}
+  prefabsBlocks:
   - {fileID: 7197594296643195801, guid: 38740eae6ba0644ee965d7995562f3d0, type: 3}
-  - {fileID: 2342012742463950120, guid: 69521d76130504d368924fe7d71ec829, type: 3}
-  prefabSlave: {fileID: 0}
---- !u!114 &-1043703737450506378
+  - {fileID: 4991540914273742686}
+  posSpawnBlock: {fileID: 1966346361175896504}
+--- !u!114 &-3425984137013732380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,42 +135,10 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: -172449198249325338}
+  ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-172449198249325338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4991540914273742686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
-  m_UseLocal: 1
---- !u!114 &4836863611282327190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4991540914273742686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 575b166b1a11e4bed843691ac05cfcb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trap: {fileID: 0}
-  enemy: {fileID: 0}
-  loot: {fileID: 0}
 --- !u!1 &8508952182595507879
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1966346361175896504}
   m_Layer: 0
-  m_Name: 1
+  m_Name: PosSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
