@@ -7,6 +7,7 @@ using Photon.Pun;
 public class MovePlayer : MonoBehaviour
 {
     [SerializeField]private AnimationController _AnimationController;
+    [SerializeField] private View _view;
     public float _speed;
     public float _forceJump;
     private Rigidbody _plyerRb;
@@ -19,6 +20,7 @@ public class MovePlayer : MonoBehaviour
     {
         _plyerRb = GetComponent<Rigidbody>();
         _photonView = GetComponent<PhotonView>();
+        _view = GetComponent<View>();
     }
     private void Update()
     {
@@ -65,7 +67,10 @@ public class MovePlayer : MonoBehaviour
             {
                 _isJump = !_isJump;
             }
-            
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                _view.ShowUiInventory();
+            }
         }
     }
     private void FixedUpdate()
@@ -88,7 +93,6 @@ public class MovePlayer : MonoBehaviour
     {
         transform.rotation *= Quaternion.Euler(0, X * Time.deltaTime*50, 0);
     }
-    
     IEnumerator JumpDelay()
     {
         yield return new WaitForSeconds(0.3f);

@@ -1,17 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class Object : MonoBehaviourPunCallbacks
+public class DataObj : MonoBehaviourPunCallbacks
 {
-    public GameObject trap;
-    public GameObject enemy;
-    public GameObject loot;
-    public Object(TypeObject _typeObject)
+    public string _name;
+    public int _id;
+    public string _description;
+    public CellData _Data;
+    
+    private void OnValidate()
+    {
+        _Data.name = _name;
+        _Data.Id = _id;
+        _Data.description = _description;
+    }
+
+    /*public DataObj(TypeObject _typeObject)
     {
         
-    }
+    }*/
     /*public void CreateObj(TypeObject _typeObject)
     {
         if (PhotonNetwork.IsMasterClient)
