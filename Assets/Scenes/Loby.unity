@@ -1053,6 +1053,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Player
-  _nameRoom: Viking
+  _nameRoom: Viking1
   _errorText: {fileID: 109123355}
   _controlPanel: {fileID: 127362099}
