@@ -14,7 +14,10 @@ public class SelderBlock : Block
         if (PoolContainer.poolBlocks.Count < 50)
         {
             var obj = prefabsBlocks[Random.Range(0, prefabsBlocks.Length)];
-            BuilderBlocks(obj, posSpawnBlock);
+            bool isBuilt = BuilderBlocks(obj, posSpawnBlock);
+            if (!isBuilt) {
+                StartCoroutine(Start());
+            }
         }
         
     }

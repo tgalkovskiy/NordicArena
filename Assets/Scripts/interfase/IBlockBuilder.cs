@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IBlockBuilder 
 {
-    public void BuilderBlocks(GameObject gameObject, Transform pos);
+    public bool BuilderBlocks(GameObject gameObject, Transform pos);
 
     public void BuilderEnemy();
 

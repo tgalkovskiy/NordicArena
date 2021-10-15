@@ -334,6 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabsBlocks:
   - {fileID: 5864937664969936873, guid: 604d81ccb8b164b6fbe9b62bfe3d76e1, type: 3}
+  - {fileID: 3293424003835228799, guid: 45ea1771eb4e6e74eb33b964c0d80165, type: 3}
   posSpawnBlock: {fileID: 1970840314620096284}
 --- !u!114 &-6147580428372636216
 MonoBehaviour:

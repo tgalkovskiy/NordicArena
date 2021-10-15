@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 6789450613549586479}
   - component: {fileID: 916438713937310018}
   - component: {fileID: -6450631899321276755}
+  - component: {fileID: -5530364940252773627}
   m_Layer: 0
   m_Name: SlaveLeft
   m_TagString: Untagged
@@ -231,10 +232,33 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 6789450613549586479}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-5530364940252773627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3293424003835228799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a65e2036c726345bd5580e73876be0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabsBlocks:
+  - {fileID: 5864937664969936873, guid: 604d81ccb8b164b6fbe9b62bfe3d76e1, type: 3}
+  - {fileID: 4996054710397645306, guid: e7674d0444ef3403ab671b7062a33f9d, type: 3}
+  - {fileID: 3695236206444099664, guid: 2b0286c4c88254340b9e02186ca7a55a, type: 3}
+  prefabsSlaveBlocks:
+  - {fileID: 4991540914273742686, guid: 76ca0522eb1b0463a9990e60ec32a8cc, type: 3}
+  - {fileID: 2342012742463950120, guid: 69521d76130504d368924fe7d71ec829, type: 3}
+  posSpawnBlock:
+  - {fileID: 8338641440008563865}
+  - {fileID: 1826981256368495509}
 --- !u!1 &5440826343960821384
 GameObject:
   m_ObjectHideFlags: 0
