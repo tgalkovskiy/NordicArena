@@ -16,11 +16,8 @@ public class CollisionDetected : MonoBehaviour
     private DataObj _collisionObj;
     private void OnCollisionEnter(Collision other)
     {
-        /*if (!other.gameObject?.GetComponent<DamageControl>())
-        {
-            return;
-        }*/
-        if (other.gameObject?.GetComponentInParent<View>()?._ID != _ID)
+        if (other.gameObject?.GetComponentInParent<View>()?._ID != _ID
+        && other.gameObject?.GetComponent<DamageControl>())
         {
             _setDamage.Invoke(10);
         }

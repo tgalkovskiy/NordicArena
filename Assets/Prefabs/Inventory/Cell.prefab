@@ -90,8 +90,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: 
+  _description: 
   _imageCell: {fileID: 0}
-  _descriptionUI: {fileID: 4860454730625797907}
+  _cellText: {fileID: 4860454730625797907}
+  _dragCellPrefab: {fileID: 2668015145485059789, guid: 293f9c7cedc89c9418c0cf176a158af6, type: 3}
 --- !u!1 &9190132168952168371
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,10 +126,10 @@ RectTransform:
   m_Father: {fileID: 5801269406501943163}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1994032519434320867
 CanvasRenderer:

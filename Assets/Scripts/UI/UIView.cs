@@ -29,4 +29,24 @@ public sealed class UIView : MonoBehaviour
         }
         return false;
     }
+
+    public InventoryCell GetCellByPosition(Vector2 position) {
+        foreach (var cell in _cells)
+        {
+            Vector2 cellPos = cell.transform.position;
+            RectTransform cellTransform = cell.transform.GetComponent<RectTransform>();
+            if (
+                position.x < cellPos.x - cellTransform.rect.width / 2
+                || position.x > cellPos.x + cellTransform.rect.width / 2
+                || position.y < cellPos.y - cellTransform.rect.height / 2
+                || position.y > cellPos.y + cellTransform.rect.height / 2
+            ) {
+                continue;
+            } else {
+                return cell;
+            }
+        }
+
+        return null;
+    }
 }
