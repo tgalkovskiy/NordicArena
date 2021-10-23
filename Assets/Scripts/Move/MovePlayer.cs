@@ -5,6 +5,8 @@ using Cinemachine;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.AI;
+using DG.Tweening;
+
 
 [RequireComponent(typeof(Rigidbody))]
 public class MovePlayer : MonoBehaviour

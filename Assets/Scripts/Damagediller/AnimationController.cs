@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 public class AnimationController : MonoBehaviour
 {
     public static AnimationController Instance;
@@ -18,7 +19,7 @@ public class AnimationController : MonoBehaviour
         Instance = this;
     }
 
-    public void MoveAnimation(int velocity)
+    public void MoveAnimation(float velocity)
     {
         //_animator.SetFloat("X", velocity);
         _animator.SetFloat("Z", velocity);
