@@ -112,7 +112,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 492303504058602230}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e3dc06f57b3394a4bbb4f36d65c4401d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.27
@@ -128,8 +128,8 @@ Rigidbody:
   m_GameObject: {fileID: 492303504058602230}
   serializedVersion: 2
   m_Mass: 2
-  m_Drag: 1
-  m_AngularDrag: 0.05
+  m_Drag: 1.5
+  m_AngularDrag: 0.1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class AnimationController : MonoBehaviour
 {
+    public static AnimationController Instance;
     public GameObject _weapon;
     public BoxCollider _collider;
     private Animator _animator;
@@ -14,6 +15,7 @@ public class AnimationController : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        Instance = this;
     }
 
     public void MoveAnimation(int velocity)
