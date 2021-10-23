@@ -16,10 +16,10 @@ public class AnimationController : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    public void MoveAnimation(Vector3 velocity)
+    public void MoveAnimation(int velocity)
     {
-        _animator.SetFloat("X", velocity.x);
-        _animator.SetFloat("Z", velocity.z);
+        //_animator.SetFloat("X", velocity);
+        _animator.SetFloat("Z", velocity);
     }
 
     public void JumpAnimation()

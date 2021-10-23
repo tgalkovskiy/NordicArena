@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class View : MonoBehaviourPunCallbacks
 {
     public UIView _uIView;
     public Slider _Hp;
+    public CinemachineVirtualCamera cinemachine;
     public int _ID;
     private Presenter _playerPresenter;
     private PhotonView _photonView;
     private CollisionDetected _collisionDetected;
+    
     private void Awake()
     {
         Application.targetFrameRate = 90;
