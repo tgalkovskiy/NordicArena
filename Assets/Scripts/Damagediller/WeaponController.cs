@@ -6,17 +6,14 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.AI;
 
-public static class WeaponController
+public  class WeaponController
 {
-     public static float distance = 5f;
-     
-     
-
-     public static bool Attack(Vector3 currentPosition, Vector3 endPosition, float agentDistance, bool isAttack)
+     public float distance = 8f;
+     public  bool Attack(Vector3 currentPosition, Vector3 endPosition, float agentDistance, bool isAttack, AnimationController animationController)
      {
           if (Vector3.Distance(currentPosition, endPosition) <= agentDistance + distance && isAttack)
           {
-               AnimationController.Instance.AttackVariant(0);
+               animationController.AttackVariant(0);
                return false;
           }
           return isAttack;
