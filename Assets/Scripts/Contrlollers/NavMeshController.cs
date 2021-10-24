@@ -6,23 +6,46 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.AI;
 
+public enum TypePosition
+{
+     DefaultPos,
+     TakePos,
+     AttackPos
+}
 public  class NavMeshController
 {
-     public float distance = 8f;
+     public float distance = 5f;
 
      private NavMeshAgent _agent;
      private AnimationController _animationController;
      private Transform _player;
-     
+     private bool isAttack;
+     Vector3 endPose =Vector3.one;
      public NavMeshController(NavMeshAgent agent, AnimationController animationController, Transform player)
      {
           _agent = agent;
           _animationController = animationController;
           _player = player;
      }
-     public void Move(Vector3 endPos)
+     public void GetPosition(Vector3 endPos, TypePosition typePosition)
      {
-          _agent.SetDestination(endPos);
+          endPose = endPos;
+          switch (typePosition)
+          {
+               case TypePosition.DefaultPos: _agent.stoppingDistance = 1;  _agent.SetDestination(endPos); isAttack = false; break;
+               case TypePosition.AttackPos:
+                    if (Vector3.Distance(_player.position, endPos) > distance)
+                    {
+                         _agent.stoppingDistance = distance;
+                         _agent.SetDestination(endPos);
+                         isAttack = true;
+                    }
+                    else
+                    {
+                         isAttack = true;  
+                    }
+                    break;
+          }
      }
      public  bool Attack(Vector3 currentPosition, Vector3 endPosition, float agentDistance, bool isAttack, AnimationController animationController)
      {
@@ -36,6 +59,11 @@ public  class NavMeshController
      public void NawMeshState()
      {
           _animationController.MoveAnimation(_agent.velocity.magnitude);
+          if (Vector3.Distance(_player.position, endPose) <= distance && isAttack)
+          {
+               _animationController.AttackVariant(0);
+               isAttack = !isAttack;
+          }
      }
 
 }

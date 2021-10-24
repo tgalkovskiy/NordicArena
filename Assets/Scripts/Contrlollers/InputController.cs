@@ -20,7 +20,7 @@ public class InputController : MonoBehaviour
     private NavMeshController _navMeshController;
     private CameraControllers _cameraControllers;
     private bool _isAttack = false;
-    
+    private TypePosition _typePosition = TypePosition.DefaultPos;
     private void Awake()
     {
         _mainCamera = Camera.main;
@@ -62,20 +62,16 @@ public class InputController : MonoBehaviour
                 Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out _hit, 100))
                 {
+                    _typePosition = TypePosition.DefaultPos;
                     if (_hit.collider.gameObject.GetComponent<Enemy>())
                     {
-                        _isAttack = true;
-                        _agent.stoppingDistance += _navMeshController.distance;
-                    }
-                    else
-                    {
-                        _agent.stoppingDistance = 2;
+                        _typePosition = TypePosition.AttackPos;
                     }
                 }
-                _navMeshController.Move(_hit.point);
+                _navMeshController.GetPosition(_hit.point, _typePosition);
             }
             _navMeshController.NawMeshState();
-            _isAttack = _navMeshController.Attack(transform.position,_hit.point,_agent.stoppingDistance,_isAttack, _animationController);
+            //_isAttack = _navMeshController.Attack(transform.position,_hit.point,_agent.stoppingDistance,_isAttack, _animationController);
             if (Input.GetKeyDown(KeyCode.I))
             {
                 _view.ShowUiInventory();

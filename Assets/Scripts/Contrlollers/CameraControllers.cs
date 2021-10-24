@@ -27,6 +27,7 @@ public class CameraControllers
     public void ReturnCameraAngleDefault()
     {
         _cinemachineOrbitalTransposer.m_XAxis.Value = 0;
+        _cinemachineFollow.m_Width = 20;
     }
     public void ZoomCamera(float zoom)
     {
