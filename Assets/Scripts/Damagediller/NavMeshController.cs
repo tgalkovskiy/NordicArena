@@ -6,9 +6,24 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.AI;
 
-public  class WeaponController
+public  class NavMeshController
 {
      public float distance = 8f;
+
+     private NavMeshAgent _agent;
+     private AnimationController _animationController;
+     private Transform _player;
+     
+     public NavMeshController(NavMeshAgent agent, AnimationController animationController, Transform player)
+     {
+          _agent = agent;
+          _animationController = animationController;
+          _player = player;
+     }
+     public void Move(Vector3 endPos)
+     {
+          _agent.SetDestination(endPos);
+     }
      public  bool Attack(Vector3 currentPosition, Vector3 endPosition, float agentDistance, bool isAttack, AnimationController animationController)
      {
           if (Vector3.Distance(currentPosition, endPosition) <= agentDistance + distance && isAttack)

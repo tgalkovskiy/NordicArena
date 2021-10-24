@@ -9,35 +9,24 @@ using DG.Tweening;
 
 
 [RequireComponent(typeof(Rigidbody))]
-public class MovePlayer : MonoBehaviour
+public class InputController : MonoBehaviour
 {
-    [SerializeField] private AnimationController _AnimationController;
-    [SerializeField] private View _view;
+    private AnimationController _animationController;
+    private View _view;
     private PhotonView _photonView;
     private NavMeshAgent _agent;
     private Camera _mainCamera;
-    private RaycastHit hit = default;
-    private WeaponController _weaponController;
-    private bool isAttack = false;
+    private RaycastHit _hit = default;
+    private NavMeshController _navMeshController;
+    private bool _isAttack = false;
     
-
-    //public float _speed;
-    //public float _forceJump;
-    //private Rigidbody _playerRb;
-    //float x;
-    //float z;
-    //private bool _isJump = false;
-    //private Vector3 _velocity;
-
-
     private void Awake()
     {
-        _agent = GetComponent<NavMeshAgent>();
         _mainCamera = Camera.main;
-        //_playerRb = GetComponent<Rigidbody>();
+        _agent = GetComponent<NavMeshAgent>();
         _photonView = GetComponent<PhotonView>();
         _view = GetComponent<View>();
-        _weaponController = new WeaponController();
+        _navMeshController = new NavMeshController(_agent, _animationController, transform);
     }
 
     private void Update()
@@ -47,31 +36,31 @@ public class MovePlayer : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit, 100))
+                if (Physics.Raycast(ray, out _hit, 100))
                 {
-                    _agent.SetDestination(hit.point);
-                    if (hit.collider.gameObject.GetComponent<Enemy>())
+                    if (_hit.collider.gameObject.GetComponent<Enemy>())
                     {
-                        isAttack = true;
-                        _agent.stoppingDistance += _weaponController.distance;
+                        _isAttack = true;
+                        _agent.stoppingDistance += _navMeshController.distance;
                     }
                     else
                     {
                         _agent.stoppingDistance = 2;
                     }
                 }
+                _navMeshController.Move(_hit.point);
             }
             if (_agent.remainingDistance <= _agent.stoppingDistance)
             {
-                _AnimationController.MoveAnimation(0);
+                _animationController.MoveAnimation(0);
                 _agent.Stop();
             }
             else
             {
                 _agent.Resume();
-                _AnimationController.MoveAnimation(1);
+                _animationController.MoveAnimation(1);
             }
-            isAttack = _weaponController.Attack(transform.position,hit.point,_agent.stoppingDistance,isAttack, _AnimationController);
+            _isAttack = _navMeshController.Attack(transform.position,_hit.point,_agent.stoppingDistance,_isAttack, _animationController);
             
             if (Input.GetKeyDown(KeyCode.I))
             {
