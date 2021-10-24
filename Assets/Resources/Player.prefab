@@ -188,8 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8bfcd696eb473418994d4ca8cbed3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _AnimationController: {fileID: 6638015641798441553}
-  _view: {fileID: 0}
+  _animationController: {fileID: 6638015641798441553}
 --- !u!114 &2898923582601244511
 MonoBehaviour:
   m_ObjectHideFlags: 0
