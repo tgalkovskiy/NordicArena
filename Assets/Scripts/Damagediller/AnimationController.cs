@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+
+public enum TypeAttack
+{
+    Combat,
+    Bow,
+    Magic
+}
 public class AnimationController : MonoBehaviour
 {
     public static AnimationController Instance;
@@ -29,17 +36,22 @@ public class AnimationController : MonoBehaviour
     {
         _animator.SetTrigger("Jump");
     }
-    public void AttackVariant(int typeAttack)
+    public void AttackVariant(TypeAttack typeAttack)
     {
-        if(_isAttack)
+        if (_isAttack)
         {
             switch (typeAttack)
             {
-                case 0: StartCoroutine(ExecuteAttack("Hit")); _powerCombo +=2; break;
-                case 1: StartCoroutine(ExecuteAttack("MiddleHit")); _powerCombo+=3; break;
-                case 2: StartCoroutine(ExecuteAttack("PowerHit")); _powerCombo+=4; break;
-                case 3: StartCoroutine(ExecuteAttack("kick")); _powerCombo += 1; break;
-            }
+                case TypeAttack.Combat:
+                    StartCoroutine(ExecuteCombat("Hit"));
+                    break;
+                case TypeAttack.Bow:
+                    StartCoroutine(ExecuteCombat("HitBow"));
+                    break;
+                case TypeAttack.Magic:
+                    StartCoroutine(ExecuteCombat("HitMagic"));
+                    break;
+            } 
         }
     }
     public void ShowUnShowWeapon()
@@ -63,30 +75,12 @@ public class AnimationController : MonoBehaviour
        _collider.enabled = false;
     }
 
-    IEnumerator ExecuteAttack(string nameAttack)
+    IEnumerator ExecuteCombat(string name)
     {
-        _countHit += 1;
         _isAttack = !_isAttack;
-        _animator.SetTrigger(nameAttack);
+        _animator.SetTrigger(name);
         yield return new WaitForSeconds(1f);
-        if (_countHit >= 3)
-        {
-            yield return ExecuteCombo();
-        }
         _isAttack = !_isAttack;
-    }
-    IEnumerator ExecuteCombo()
-    {
-        switch (_powerCombo)
-        {
-            case 5: _animator.SetTrigger("Combo"); break;
-            case 6: _animator.SetTrigger("Combo2"); break;
-            case 7: _animator.SetTrigger("Combo3"); break;
-            case 8: _animator.SetTrigger("Combo4"); break;
-        }
-        _powerCombo = 0;
-        _countHit = 0;
-        yield return null;
     }
     IEnumerator ExecuteWeapon()
     {

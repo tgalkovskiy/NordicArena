@@ -68,10 +68,9 @@ public class InputController : MonoBehaviour
                         _typePosition = TypePosition.AttackPos;
                     }
                 }
-                _navMeshController.GetPosition(_hit.point, _typePosition);
+                _navMeshController.GetPosition(_hit.point, _typePosition, _hit.collider.transform);
             }
             _navMeshController.NawMeshState();
-            //_isAttack = _navMeshController.Attack(transform.position,_hit.point,_agent.stoppingDistance,_isAttack, _animationController);
             if (Input.GetKeyDown(KeyCode.I))
             {
                 _view.ShowUiInventory();

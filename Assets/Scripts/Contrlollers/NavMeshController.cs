@@ -14,11 +14,12 @@ public enum TypePosition
 }
 public  class NavMeshController
 {
-     public float distance = 5f;
+     public float distance = 2f;
 
      private NavMeshAgent _agent;
      private AnimationController _animationController;
      private Transform _player;
+     private Transform _targetObj;
      private bool isAttack;
      Vector3 endPose =Vector3.one;
      public NavMeshController(NavMeshAgent agent, AnimationController animationController, Transform player)
@@ -27,9 +28,10 @@ public  class NavMeshController
           _animationController = animationController;
           _player = player;
      }
-     public void GetPosition(Vector3 endPos, TypePosition typePosition)
+     public void GetPosition(Vector3 endPos, TypePosition typePosition, Transform targetObj)
      {
           endPose = endPos;
+          _targetObj = targetObj;
           switch (typePosition)
           {
                case TypePosition.DefaultPos: _agent.stoppingDistance = 1;  _agent.SetDestination(endPos); isAttack = false; break;
@@ -47,21 +49,17 @@ public  class NavMeshController
                     break;
           }
      }
-     public  bool Attack(Vector3 currentPosition, Vector3 endPosition, float agentDistance, bool isAttack, AnimationController animationController)
-     {
-          if (Vector3.Distance(currentPosition, endPosition) <= agentDistance + distance && isAttack)
-          {
-               _animationController.AttackVariant(0);
-               return false;
-          }
-          return isAttack;
-     }
      public void NawMeshState()
      {
           _animationController.MoveAnimation(_agent.velocity.magnitude);
-          if (Vector3.Distance(_player.position, endPose) <= distance && isAttack)
+          if (Vector3.Distance(_player.position, endPose) <= distance+0.1f && isAttack)
           {
-               _animationController.AttackVariant(0);
+               if (_targetObj != null)
+               {
+                    var relativePos = _targetObj.position - _player.position;
+                    _player.rotation = Quaternion.LookRotation(relativePos);
+               }
+               _animationController.AttackVariant(TypeAttack.Combat);
                isAttack = !isAttack;
           }
      }
