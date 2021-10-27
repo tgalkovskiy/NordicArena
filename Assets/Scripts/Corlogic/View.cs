@@ -12,6 +12,7 @@ public class View : MonoBehaviourPunCallbacks
     public Slider _Hp;
     public CinemachineVirtualCamera cinemachine;
     public int _ID;
+    public GameObject VFX;
     private Presenter _playerPresenter;
     private PhotonView _photonView;
     private CollisionDetected _collisionDetected;

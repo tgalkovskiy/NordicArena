@@ -14,19 +14,20 @@ public enum TypePosition
 }
 public  class NavMeshController
 {
-     public float distance = 2f;
-
+     public float distance = 7f;
+     public GameObject VFX;
      private NavMeshAgent _agent;
      private AnimationController _animationController;
      private Transform _player;
      private Transform _targetObj;
      private bool isAttack;
      Vector3 endPose =Vector3.one;
-     public NavMeshController(NavMeshAgent agent, AnimationController animationController, Transform player)
+     public NavMeshController(NavMeshAgent agent, AnimationController animationController, Transform player, GameObject _VFX)
      {
           _agent = agent;
           _animationController = animationController;
           _player = player;
+          VFX = _VFX;
      }
      public void GetPosition(Vector3 endPos, TypePosition typePosition, Transform targetObj)
      {
@@ -59,9 +60,12 @@ public  class NavMeshController
                     var relativePos = _targetObj.position - _player.position;
                     _player.rotation = Quaternion.LookRotation(relativePos);
                }
-               _animationController.AttackVariant(TypeAttack.Combat);
+               _animationController.AttackVariant(TypeAttack.Magic);
+               VFXManager.Instance.VFXEffect(VFX, 3);
                isAttack = !isAttack;
           }
      }
+
+     
 
 }

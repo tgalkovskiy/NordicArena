@@ -11,6 +11,7 @@ using DG.Tweening;
 [RequireComponent(typeof(Rigidbody))]
 public class InputController : MonoBehaviour
 {
+    public GameObject VFX;
     public AnimationController _animationController;
     private View _view;
     private PhotonView _photonView;
@@ -21,17 +22,19 @@ public class InputController : MonoBehaviour
     private CameraControllers _cameraControllers;
     private bool _isAttack = false;
     private TypePosition _typePosition = TypePosition.DefaultPos;
+    
     private void Awake()
     {
         _mainCamera = Camera.main;
         _agent = GetComponent<NavMeshAgent>();
         _photonView = GetComponent<PhotonView>();
         _view = GetComponent<View>();
-        _navMeshController = new NavMeshController(_agent, _animationController, transform);
     }
     private void Start()
     {
         _cameraControllers = new CameraControllers(_view.cinemachine);
+        VFX = _view.VFX;
+        _navMeshController = new NavMeshController(_agent, _animationController, transform, VFX);
     }
     private void Update()
     {
