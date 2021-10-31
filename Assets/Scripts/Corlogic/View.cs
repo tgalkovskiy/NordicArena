@@ -23,6 +23,7 @@ public class View : MonoBehaviourPunCallbacks
         _photonView = GetComponent<PhotonView>();
         _collisionDetected = GetComponent<CollisionDetected>();
         _playerPresenter = new Presenter(_collisionDetected, this);
+        _uIView.Init();
     }
     public void SetHp(int hp)
     {

@@ -2,31 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using WebSocketSharp;
 
 public sealed class UIView : MonoBehaviour
 {
+    public InventoryCell _cellPrefabs;
     [SerializeField] private GameObject _inventoryPanel = default;
-    [SerializeField] private List<InventoryCell> _cells = new List<InventoryCell>();
+    [SerializeField] private Transform _inventoryСontainer = default;
+    [SerializeField] private Transform _cellContainer;
+    public List<InventoryCell> _cellsInventory = new List<InventoryCell>();
+    [SerializeField] private List<ItemCell> _itemCells = new List<ItemCell>();
     private bool isActivInventory = false;
-
+    public ItemCell DragCell;
     public void ShowInventoryPanel()
     {
         isActivInventory = !isActivInventory;
         _inventoryPanel.SetActive(isActivInventory);
     }
+    public void Init()
+    {
+        for (int i = 0; i < _itemCells.Count; i++)
+        {
+            _itemCells[i].Init(this);
+        }
+        CreateCellInventory(44);
+    }
     public bool SetCell(CellData cellData)
     {
-        Debug.Log("find sell");
-        foreach (var cell in _cells)
+        foreach (var cell in _cellsInventory)
         {
             if(cell._name.IsNullOrEmpty())
             {
-                Debug.Log(cell.name);
                 cell.SetParameters(cellData);
                 return true;
             }
         }
         return false;
+    }
+    public void DeleteInventoryCell()
+    {
+        Destroy(_cellsInventory[_cellsInventory.Count-1].gameObject);
+        _cellsInventory.RemoveAt(_cellsInventory.Count-1);
+    }
+    public void CreateCellInventory(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            _cellsInventory.Add(Instantiate(_cellPrefabs, _cellContainer));
+            _cellsInventory[_cellsInventory.Count-1].Init(_inventoryСontainer, _cellContainer, this);
+            _cellsInventory[_cellsInventory.Count - 1].name = (_cellsInventory.Count - 1).ToString();
+            _cellsInventory[_cellsInventory.Count-1].SetParameters(new CellData(){ Id =_cellsInventory.Count-1, name = string.Empty, description = string.Empty});
+        }
     }
 }

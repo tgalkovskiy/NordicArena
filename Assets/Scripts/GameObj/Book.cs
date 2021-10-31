@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class Book : DataObj
 {
-    public void A()
-    {
-        
-    }
+    
 }
