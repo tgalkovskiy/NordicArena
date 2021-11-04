@@ -11,6 +11,7 @@ public class LobySpawner : MonoBehaviourPunCallbacks
     [SerializeField] private CinemachineVirtualCamera cinemachine = default;
     [SerializeField] private Slider _hpSlider = default;
     [SerializeField] private GameObject VFX;
+    [SerializeField] private GameObject _moveTarget = default;
     [SerializeField] private GameObject _prefab = default;
     private Dictionary<int, Photon.Realtime.Player> Players;
     
@@ -21,6 +22,7 @@ public class LobySpawner : MonoBehaviourPunCallbacks
         player.GetComponent<View>()._Hp = _hpSlider;
         player.GetComponent<View>().cinemachine = cinemachine;
         player.GetComponent<View>().VFX = VFX;
+        player.GetComponent<View>()._moveTarget = _moveTarget;
         cinemachine.Follow = player.transform;
         cinemachine.LookAt = player.transform;
     }

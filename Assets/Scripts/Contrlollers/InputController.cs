@@ -18,7 +18,7 @@ public class InputController : MonoBehaviour
     private NavMeshAgent _agent;
     private Camera _mainCamera;
     private RaycastHit _hit = default;
-    private NavMeshController _navMeshController;
+    private ActionController _actionController;
     private CameraControllers _cameraControllers;
     private bool _isAttack = false;
     private TypePosition _typePosition = TypePosition.DefaultPos;
@@ -34,7 +34,7 @@ public class InputController : MonoBehaviour
     {
         _cameraControllers = new CameraControllers(_view.cinemachine);
         VFX = _view.VFX;
-        _navMeshController = new NavMeshController(_agent, _animationController, transform, VFX);
+        _actionController = new ActionController(_agent, _animationController, transform, VFX, _view._moveTarget, _view);
     }
     private void Update()
     {
@@ -70,14 +70,33 @@ public class InputController : MonoBehaviour
                     {
                         _typePosition = TypePosition.AttackPos;
                     }
+                    if (_hit.collider.gameObject.GetComponent<DataObj>())
+                    {
+                        _typePosition = TypePosition.TakePos;
+                    }
+                    _actionController.GetPosition(_hit.point, _typePosition, _hit.collider.transform);
                 }
-                _navMeshController.GetPosition(_hit.point, _typePosition, _hit.collider.transform);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                _actionController._TypeAttack = TypeAttack.Combat;
+                _actionController.distanceSkill = 2;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                _actionController._TypeAttack = TypeAttack.Bow;
+                _actionController.distanceSkill = 9;
+            }
+            if(Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                _actionController._TypeAttack = TypeAttack.Magic;
+                _actionController.distanceSkill = 6;
             }
             if (Input.GetKeyDown(KeyCode.I))
             {
                 _view.ShowUiInventory();
             }
-            _navMeshController.NawMeshState();
+            _actionController.NawMeshState();
         }
     }
     

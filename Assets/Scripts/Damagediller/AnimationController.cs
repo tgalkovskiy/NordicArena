@@ -54,6 +54,10 @@ public class AnimationController : MonoBehaviour
             } 
         }
     }
+    public void TakeItem()
+    {
+        _animator.SetTrigger("kick");
+    }
     public void ShowUnShowWeapon()
     {
         if (!_isWeapon)

@@ -13,16 +13,16 @@ public class View : MonoBehaviourPunCallbacks
     public CinemachineVirtualCamera cinemachine;
     public int _ID;
     public GameObject VFX;
+    public GameObject _moveTarget;
     private Presenter _playerPresenter;
     private PhotonView _photonView;
-    private CollisionDetected _collisionDetected;
-    
+
     private void Awake()
     {
         Application.targetFrameRate = 90;
         _photonView = GetComponent<PhotonView>();
-        _collisionDetected = GetComponent<CollisionDetected>();
-        _playerPresenter = new Presenter(_collisionDetected, this);
+        //_collisionDetected = GetComponent<CollisionDetected>();
+        _playerPresenter = new Presenter(this);
         _uIView.Init();
     }
     public void SetHp(int hp)
@@ -37,11 +37,12 @@ public class View : MonoBehaviourPunCallbacks
     {
         _uIView.ShowInventoryPanel();
     }
-    public void SetDataCell(CellData cellData)
+
+    public void SetDataCell(CellData cellData, GameObject gameObject)
     {
-        if(_uIView.SetCell(cellData))
+        if (_uIView.SetCell(cellData))
         {
-            _collisionDetected.DeleteCollisionObj();
+            Destroy(gameObject);
         }
     }
 }
