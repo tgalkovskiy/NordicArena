@@ -53,7 +53,7 @@ public  class ActionController
                case TypePosition.TakePos: _agent.stoppingDistance = 1;  _agent.SetDestination(endPos); break;
           }
      }
-     public void NawMeshState()
+     public void ActionState()
      {
           _animationController.MoveAnimation(_agent.velocity.magnitude);
           if (_typePosition == TypePosition.AttackPos)

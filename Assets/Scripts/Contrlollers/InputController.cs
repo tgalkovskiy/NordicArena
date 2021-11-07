@@ -59,6 +59,10 @@ public class InputController : MonoBehaviour
             {
                 _cameraControllers.ReturnCameraAngleDefault();
             }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                _animationController.ShowUnShowWeapon();
+            }
             //getting a position for movement
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -96,7 +100,7 @@ public class InputController : MonoBehaviour
             {
                 _view.ShowUiInventory();
             }
-            _actionController.NawMeshState();
+            _actionController.ActionState();
         }
     }
     

@@ -16,15 +16,15 @@ public class CursorController : MonoBehaviour
         {
             if (_hit.collider.gameObject.GetComponent<Enemy>())
             {
-                Cursor.SetCursor(_defCursor, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(_attackCursor, Vector2.zero, CursorMode.Auto);
             }
             else if (_hit.collider.gameObject.GetComponent<DataObj>())
             {
-                Cursor.SetCursor(_attackCursor, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(_takeCursor, Vector2.zero, CursorMode.Auto);
             }
             else
             {
-                Cursor.SetCursor(_takeCursor, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(_defCursor, Vector2.zero, CursorMode.Auto);
             }
         }
     }

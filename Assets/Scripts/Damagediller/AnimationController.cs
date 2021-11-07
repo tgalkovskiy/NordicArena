@@ -14,6 +14,7 @@ public class AnimationController : MonoBehaviour
 {
     public static AnimationController Instance;
     public GameObject _weapon;
+    public ParticleSystem _hit;
     public BoxCollider _collider;
     private Animator _animator;
     private bool _isAttack = true;
@@ -43,7 +44,7 @@ public class AnimationController : MonoBehaviour
             switch (typeAttack)
             {
                 case TypeAttack.Combat:
-                    StartCoroutine(ExecuteCombat("Hit"));
+                    StartCoroutine(ExecuteCombat("Hit")); StartCoroutine(ExecuteSplash());
                     break;
                 case TypeAttack.Bow:
                     StartCoroutine(ExecuteCombat("HitBow"));
@@ -56,7 +57,7 @@ public class AnimationController : MonoBehaviour
     }
     public void TakeItem()
     {
-        _animator.SetTrigger("kick");
+        _animator.SetTrigger("Take");
     }
     public void ShowUnShowWeapon()
     {
@@ -91,5 +92,11 @@ public class AnimationController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         _weapon.SetActive(!_isWeapon);
         _isWeapon = !_isWeapon;
+    }
+
+    IEnumerator ExecuteSplash()
+    {
+        yield return new WaitForSeconds(0.3f);
+        _hit.Play();
     }
 }

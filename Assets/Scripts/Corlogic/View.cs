@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -42,7 +43,13 @@ public class View : MonoBehaviourPunCallbacks
     {
         if (_uIView.SetCell(cellData))
         {
-            Destroy(gameObject);
+            StartCoroutine(DestroyObj(gameObject));
         }
+    }
+
+    IEnumerator DestroyObj(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
     }
 }
