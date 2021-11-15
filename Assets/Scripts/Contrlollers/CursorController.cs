@@ -14,7 +14,7 @@ public class CursorController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out _hit, 100))
         {
-            if (_hit.collider.gameObject.GetComponent<Enemy>())
+            if (_hit.collider.gameObject.GetComponent<MonstersView>())
             {
                 Cursor.SetCursor(_attackCursor, Vector2.zero, CursorMode.Auto);
             }

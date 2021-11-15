@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class Presenter
 {
-    private Model _modelPlayer;
+    private Model _model;
     private View _view;
-    public Presenter(View _view)
+    public Presenter(View view)
     {
-        _modelPlayer = new Model(100);
-        this._view = _view;
-        _modelPlayer._hpUpdated += this._view.SetHp;
-        
-        //_collisionDetected._setDamage += _modelPlayer.HitDamage;
-        //_collisionDetected._getData += _modelPlayer.CreateDataCell;
-        //_modelPlayer._cellData += this._view.SetDataCell;
+        _model = new Model(100);
+        _view = view;
+        _model._hpUpdated += _view.SetHp;
     }
-    
+    public void GetDamage(float damage)
+    {
+        _model.GetDamage(damage);
+    }
 }

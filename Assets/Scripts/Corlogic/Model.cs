@@ -5,22 +5,16 @@ using UnityEngine;
 
 public class Model 
 {
-    public Action<int> _hpUpdated;
-    public Action<CellData> _cellData;
+    public Action<float> _hpUpdated;
+    private float _Hp;
     public Model(int HP)
     {
         _Hp = HP;
     }
-    private int _Hp;
-
-    public void HitDamage(int damage)
+    public void GetDamage(float damage)
     {
         _Hp -= damage;
         _hpUpdated.Invoke(_Hp);
-    }
-    public void CreateDataCell(CellData data)
-    {
-        Debug.Log("createCell");
-        _cellData.Invoke(data);
+        Debug.Log(_Hp);
     }
 }

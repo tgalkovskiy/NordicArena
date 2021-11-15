@@ -5,36 +5,25 @@ using Cinemachine;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.AI;
-using DG.Tweening;
 
 
-[RequireComponent(typeof(Rigidbody))]
-public class InputController : MonoBehaviour
+public class InputController : StateControllers
 {
-    public GameObject VFX;
-    public AnimationController _animationController;
-    private View _view;
-    private PhotonView _photonView;
-    private NavMeshAgent _agent;
+    private PlayerView _playerView;
     private Camera _mainCamera;
     private RaycastHit _hit = default;
-    private ActionController _actionController;
     private CameraControllers _cameraControllers;
-    private bool _isAttack = false;
-    private TypePosition _typePosition = TypePosition.DefaultPos;
-    
     private void Awake()
     {
         _mainCamera = Camera.main;
         _agent = GetComponent<NavMeshAgent>();
         _photonView = GetComponent<PhotonView>();
-        _view = GetComponent<View>();
+        _playerView = GetComponent<PlayerView>();
     }
     private void Start()
     {
-        _cameraControllers = new CameraControllers(_view.cinemachine);
-        VFX = _view.VFX;
-        _actionController = new ActionController(_agent, _animationController, transform, VFX, _view._moveTarget, _view);
+        _cameraControllers = new CameraControllers(_playerView.cinemachine);
+        _actionController = new ActionController(_agent, this, _animationController, transform, _playerView);
     }
     private void Update()
     {
@@ -69,16 +58,16 @@ public class InputController : MonoBehaviour
                 Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out _hit, 100))
                 {
-                    _typePosition = TypePosition.DefaultPos;
-                    if (_hit.collider.gameObject.GetComponent<Enemy>())
+                    _state = State.Move;
+                    if (_hit.collider.gameObject.GetComponent<MonstersView>())
                     {
-                        _typePosition = TypePosition.AttackPos;
+                        _state = State.Attack;
                     }
                     if (_hit.collider.gameObject.GetComponent<DataObj>())
                     {
-                        _typePosition = TypePosition.TakePos;
+                        _state = State.Take;
                     }
-                    _actionController.GetPosition(_hit.point, _typePosition, _hit.collider.transform);
+                    _actionController.GetPosition(_hit.point, _hit.collider.transform);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -98,7 +87,7 @@ public class InputController : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.I))
             {
-                _view.ShowUiInventory();
+                _playerView.ShowUiInventory();
             }
             _actionController.ActionState();
         }

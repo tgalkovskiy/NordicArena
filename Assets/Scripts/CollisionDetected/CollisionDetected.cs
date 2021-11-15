@@ -6,10 +6,10 @@ using UnityEngine;
 public class CollisionDetected : MonoBehaviour
 {
     private int _ID;
-    private void Start()
+    /*private void Start()
     {
         _ID = GetComponent<View>()._ID;
-    }
+    }*/
     public Action<int> _setDamage;
     public Action<CellData> _getData;
 
@@ -20,10 +20,10 @@ public class CollisionDetected : MonoBehaviour
         {
             return;
         }*/
-        if (other.gameObject?.GetComponentInParent<View>()?._ID != _ID)
+        /*if (other.gameObject?.GetComponentInParent<View>()?._ID != _ID)
         {
             _setDamage.Invoke(10);
-        }
+        }*/
         if (other.gameObject?.GetComponent<DataObj>())
         {
             Debug.Log(other.gameObject.name);

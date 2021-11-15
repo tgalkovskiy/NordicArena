@@ -1,55 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
-using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public class View : MonoBehaviourPunCallbacks
 {
-    public UIView _uIView;
-    public Slider _Hp;
-    public CinemachineVirtualCamera cinemachine;
-    public int _ID;
-    public GameObject VFX;
-    public GameObject _moveTarget;
-    private Presenter _playerPresenter;
-    private PhotonView _photonView;
-
-    private void Awake()
+    public UiVievStats _Stats;
+    public Presenter _Presenter;
+    public PhotonView _photonView;
+    
+    public void GetDamage(float damage)
     {
-        Application.targetFrameRate = 90;
-        _photonView = GetComponent<PhotonView>();
-        //_collisionDetected = GetComponent<CollisionDetected>();
-        _playerPresenter = new Presenter(this);
-        _uIView.Init();
+        _Presenter.GetDamage(damage);
     }
-    public void SetHp(int hp)
+    public void SetHp(float hp)
     {
-        if (_Hp != null)
+        if (_Stats._hp != null)
         {
-            _Hp.value = hp;
-            Debug.Log(hp); 
+            _Stats._hp.fillAmount =hp/100;
         }
-    }
-    public void ShowUiInventory()
-    {
-        _uIView.ShowInventoryPanel();
-    }
-
-    public void SetDataCell(CellData cellData, GameObject gameObject)
-    {
-        if (_uIView.SetCell(cellData))
-        {
-            StartCoroutine(DestroyObj(gameObject));
-        }
-    }
-
-    IEnumerator DestroyObj(GameObject gameObject)
-    {
-        yield return new WaitForSeconds(1);
-        Destroy(gameObject);
     }
 }

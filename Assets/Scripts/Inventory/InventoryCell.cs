@@ -24,13 +24,13 @@ public class InventoryCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private Transform _inventoryParent;
     private Transform _cellParent;
     private CellData _data;
-    private UIView _uiView;
+    private UIViewInventory _uiViewInventory;
     
-    public void Init(Transform _containerInventory, Transform _containerCell, UIView _view)
+    public void Init(Transform _containerInventory, Transform _containerCell, UIViewInventory viewInventory)
     {
         _inventoryParent = _containerInventory;
         _cellParent = _containerCell;
-        _uiView = _view;
+        _uiViewInventory = viewInventory;
     }
     public void SetParameters(CellData cellData)
     {
@@ -87,9 +87,9 @@ public class InventoryCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if(!_name.IsNullOrEmpty())
         {
-            if (_uiView.DragCell !=null && _uiView.DragCell._InventoryEnum == _data.type)
+            if (_uiViewInventory.DragCell !=null && _uiViewInventory.DragCell._InventoryEnum == _data.type)
             {
-                transform.parent = _uiView.DragCell.transform;
+                transform.parent = _uiViewInventory.DragCell.transform;
             }
             else
             {
@@ -108,11 +108,11 @@ public class InventoryCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             transform.GetComponent<Image>().raycastTarget = true;
             if (_cellParent.transform.childCount < 44)
             {
-                _uiView.CreateCellInventory(1);
+                _uiViewInventory.CreateCellInventory(1);
             }
             if (_cellParent.transform.childCount > 44)
             {
-                _uiView.DeleteInventoryCell();
+                _uiViewInventory.DeleteInventoryCell();
             }
         }
     }

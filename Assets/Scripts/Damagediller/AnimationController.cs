@@ -12,47 +12,36 @@ public enum TypeAttack
 }
 public class AnimationController : MonoBehaviour
 {
-    public static AnimationController Instance;
+    //public static AnimationController Instance;
     public GameObject _weapon;
     public ParticleSystem _hit;
-    public BoxCollider _collider;
     private Animator _animator;
-    private bool _isAttack = true;
     private bool _isWeapon = false;
-    private int _countHit = 0;
-    private int _powerCombo = 0;
+    private DamageDiller _damageDiller;
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        Instance = this;
+        _damageDiller = GetComponent<DamageDiller>();
+        //Instance = this;
     }
 
     public void MoveAnimation(float velocity)
     {
-        //_animator.SetFloat("X", velocity);
         _animator.SetFloat("Z", velocity);
-    }
-
-    public void JumpAnimation()
-    {
-        _animator.SetTrigger("Jump");
     }
     public void AttackVariant(TypeAttack typeAttack)
     {
-        if (_isAttack)
+        switch (typeAttack)
         {
-            switch (typeAttack)
-            {
-                case TypeAttack.Combat:
-                    StartCoroutine(ExecuteCombat("Hit")); StartCoroutine(ExecuteSplash());
-                    break;
-                case TypeAttack.Bow:
-                    StartCoroutine(ExecuteCombat("HitBow"));
-                    break;
-                case TypeAttack.Magic:
-                    StartCoroutine(ExecuteCombat("HitMagic"));
-                    break;
-            } 
+            case TypeAttack.Combat:
+                StartCoroutine(ExecuteCombat("Hit"));
+                break;
+            case TypeAttack.Bow:
+                StartCoroutine(ExecuteCombat("HitBow"));
+                break;
+            case TypeAttack.Magic:
+                StartCoroutine(ExecuteCombat("HitMagic"));
+                break;
         }
     }
     public void TakeItem()
@@ -71,21 +60,12 @@ public class AnimationController : MonoBehaviour
         }
         StartCoroutine(ExecuteWeapon());
     }
-    public void OnWeapon()
-    {
-        _collider.enabled = true;
-    }
-    public void OfWeapon()
-    {
-       _collider.enabled = false;
-    }
-
+    
     IEnumerator ExecuteCombat(string name)
     {
-        _isAttack = !_isAttack;
         _animator.SetTrigger(name);
-        yield return new WaitForSeconds(1f);
-        _isAttack = !_isAttack;
+        yield return new WaitForSeconds(1.2f);
+        _damageDiller.Damage();
     }
     IEnumerator ExecuteWeapon()
     {
