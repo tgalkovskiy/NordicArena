@@ -12,7 +12,6 @@ public enum TypeAttack
 }
 public class AnimationController : MonoBehaviour
 {
-    //public static AnimationController Instance;
     public GameObject _weapon;
     public ParticleSystem _hit;
     private Animator _animator;

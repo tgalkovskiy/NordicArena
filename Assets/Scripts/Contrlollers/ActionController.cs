@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Cinemachine;
+﻿
 using UnityEngine;
-using Photon.Pun;
 using UnityEngine.AI;
 
 public  class ActionController
 {
      public float distanceSkill = 4f;
-     public float distanceTake = 1;
+     private float distanceTake = 1;
      public TypeAttack _TypeAttack = TypeAttack.Combat;
      private NavMeshAgent _agent;
      private StateControllers _state;
@@ -18,14 +14,7 @@ public  class ActionController
      private Transform _player;
      private Transform _targetObj;
      private Vector3 _endPose =Vector3.one;
-     private float _cooldown =3f;
-     public ActionController(NavMeshAgent agent, StateControllers state, AnimationController animationController, Transform player)
-     {
-          _agent = agent;
-          _animationController = animationController;
-          _player = player;
-          _state = state;
-     }
+     public float _cooldown =3f;
      public ActionController(NavMeshAgent agent, StateControllers state, AnimationController animationController, Transform player, PlayerView playerView)
      {
           _agent = agent;

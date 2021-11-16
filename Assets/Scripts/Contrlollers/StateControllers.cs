@@ -22,12 +22,13 @@ public class StateControllers : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _photonView = GetComponent<PhotonView>();
-        //_view = GetComponent<View>();
     }
     private void Start()
     {
-        _actionController = new ActionController(_agent, this, _animationController, transform);
+        _actionController = new ActionController(_agent, this, _animationController, transform, _playerView);
     }
 
-    
+
+
+
 }

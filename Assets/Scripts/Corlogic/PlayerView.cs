@@ -10,6 +10,7 @@ public class PlayerView : View
 
     private void Awake()
     {
+        Application.targetFrameRate = 90;
         _photonView = GetComponent<PhotonView>();
         _Presenter = new Presenter(this);
         _viewInventory.Init();

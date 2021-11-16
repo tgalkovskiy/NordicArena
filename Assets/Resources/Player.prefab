@@ -588,7 +588,7 @@ MonoBehaviour:
   pointPatrol: []
   _photonView: {fileID: 0}
   _agent: {fileID: 0}
-  delay: 5
+  delay: 1
 --- !u!114 &7311106150079733623
 MonoBehaviour:
   m_ObjectHideFlags: 0

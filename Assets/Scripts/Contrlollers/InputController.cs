@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Cinemachine;
+
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.AI;
-
 
 public class InputController : StateControllers
 {
@@ -19,12 +15,14 @@ public class InputController : StateControllers
         _agent = GetComponent<NavMeshAgent>();
         _photonView = GetComponent<PhotonView>();
         _playerView = GetComponent<PlayerView>();
+        
     }
     private void Start()
     {
         _cameraControllers = new CameraControllers(_playerView.cinemachine);
         _actionController = new ActionController(_agent, this, _animationController, transform, _playerView);
     }
+    
     private void Update()
     {
         if (_photonView.IsMine)
