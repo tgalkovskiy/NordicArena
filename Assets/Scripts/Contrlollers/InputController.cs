@@ -19,14 +19,14 @@ public class InputController : StateControllers
     }
     private void Start()
     {
-        _cameraControllers = new CameraControllers(_playerView.cinemachine);
+        _cameraControllers = new CameraControllers(_playerView._cinemachine);
         _actionController = new ActionController(_agent, this, _animationController, transform, _playerView);
     }
     
     private void Update()
     {
-        if (_photonView.IsMine)
-        {
+        /*if (_photonView.IsMine)
+        {*/
             //turn left
             if (Input.GetKey(KeyCode.Q))
             {
@@ -71,24 +71,24 @@ public class InputController : StateControllers
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 _actionController._TypeAttack = TypeAttack.Combat;
-                _actionController.distanceSkill = 2;
+                
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 _actionController._TypeAttack = TypeAttack.Bow;
-                _actionController.distanceSkill = 9;
+                
             }
             if(Input.GetKeyDown(KeyCode.Alpha3))
             {
                 _actionController._TypeAttack = TypeAttack.Magic;
-                _actionController.distanceSkill = 6;
+                
             }
             if (Input.GetKeyDown(KeyCode.I))
             {
                 _playerView.ShowUiInventory();
             }
             _actionController.ActionState();
-        }
+        //}
     }
     
 }

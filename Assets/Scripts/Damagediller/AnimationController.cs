@@ -21,7 +21,6 @@ public class AnimationController : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _damageDiller = GetComponent<DamageDiller>();
-        //Instance = this;
     }
 
     public void MoveAnimation(float velocity)

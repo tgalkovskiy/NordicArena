@@ -8,8 +8,8 @@ public class Presenter
     private View _view;
     public Presenter(View view)
     {
-        _model = new Model(100);
         _view = view;
+        _model = new Model(_view._stats);
         _model._hpUpdated += _view.SetHp;
     }
     public void GetDamage(float damage)

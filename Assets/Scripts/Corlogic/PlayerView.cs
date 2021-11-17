@@ -2,17 +2,15 @@ using System.Collections;
 using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerView : View
 {
     public UIViewInventory _viewInventory;
-    public CinemachineVirtualCamera cinemachine;
+    public CinemachineVirtualCamera _cinemachine;
 
-    private void Awake()
+    private void Start()
     {
-        Application.targetFrameRate = 90;
-        _photonView = GetComponent<PhotonView>();
-        _Presenter = new Presenter(this);
         _viewInventory.Init();
     }
     public void ShowUiInventory()

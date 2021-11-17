@@ -1722,7 +1722,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4816ab51d80b33429ddae56dd2060eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Stats: {fileID: 5118520812632367198}
+  _StatsUI: {fileID: 0}
+  _stats: {fileID: 11400000, guid: 4e96c8276bce05c41874557a38325448, type: 2}
   _photonView: {fileID: 0}
 --- !u!114 &5118520812632367198
 MonoBehaviour:

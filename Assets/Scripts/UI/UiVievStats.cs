@@ -6,5 +6,6 @@ using UnityEngine.UI;
 public class UiVievStats : MonoBehaviour
 {
     public Image _hp;
+    public Text _hpText;
     public Image _mana;
 }

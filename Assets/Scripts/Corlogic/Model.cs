@@ -1,20 +1,17 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Model 
 {
     public Action<float> _hpUpdated;
-    private float _Hp;
-    public Model(int HP)
+    private Stats _stats;
+    public Model(Stats stats)
     {
-        _Hp = HP;
+        _stats = stats;
     }
     public void GetDamage(float damage)
     {
-        _Hp -= damage;
-        _hpUpdated.Invoke(_Hp);
-        Debug.Log(_Hp);
+        _stats._hpNow -= damage - _stats._armor;
+        _hpUpdated.Invoke(_stats._hpNow);
     }
 }

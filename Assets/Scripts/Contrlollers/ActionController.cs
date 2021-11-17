@@ -4,8 +4,7 @@ using UnityEngine.AI;
 
 public  class ActionController
 {
-     public float distanceSkill = 4f;
-     private float distanceTake = 1;
+     private Stats _stats;
      public TypeAttack _TypeAttack = TypeAttack.Combat;
      private NavMeshAgent _agent;
      private StateControllers _state;
@@ -14,7 +13,9 @@ public  class ActionController
      private Transform _player;
      private Transform _targetObj;
      private Vector3 _endPose =Vector3.one;
-     public float _cooldown =3f;
+     private float _cooldown;
+     private float distanceTake = 1;
+     
      public ActionController(NavMeshAgent agent, StateControllers state, AnimationController animationController, Transform player, PlayerView playerView)
      {
           _agent = agent;
@@ -22,6 +23,17 @@ public  class ActionController
           _player = player;
           _playerView = playerView;
           _state = state;
+          _stats = playerView._stats;
+          _cooldown = _playerView._stats._coolDown;
+     }
+     public ActionController(NavMeshAgent agent, StateControllers state, AnimationController animationController, Transform player, View playerView)
+     {
+          _agent = agent;
+          _animationController = animationController;
+          _player = player;
+          _state = state;
+          _stats = playerView._stats;
+          _cooldown = _stats._coolDown;
      }
      public void GetPosition(Vector3 endPos, Transform targetObj)
      {
@@ -31,9 +43,9 @@ public  class ActionController
           {
                case State.Move: _agent.stoppingDistance = 1;  _agent.SetDestination(endPos); break;
                case State.Patrol: _agent.SetDestination(endPos); break;
-               case State.Attack: if (Vector3.Distance(_player.position, endPos) > distanceSkill) 
+               case State.Attack: if (Vector3.Distance(_player.position, endPos) > _stats._distanceSkill) 
                {
-                    _agent.stoppingDistance = distanceSkill;
+                    _agent.stoppingDistance = _stats._distanceSkill;
                     _agent.SetDestination(endPos);
                }break;
                case State.Take: _agent.stoppingDistance = 1;  _agent.SetDestination(endPos); break;
@@ -55,7 +67,7 @@ public  class ActionController
                     {
                         _animationController.AttackVariant(_TypeAttack);
                         _state._state = State.Stay;
-                        _cooldown = 5f;
+                        _cooldown = _stats._coolDown;;
                     }
                }
                else if (_agent.remainingDistance >= 20)
