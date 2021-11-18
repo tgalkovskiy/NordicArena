@@ -1,17 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class DamageDiller : MonoBehaviour
 {
     public Transform pos;
     public View _view;
-    public float sizeZoneDamage;
     private RaycastHit[] _hits;
     public void Damage()
     {
-        _hits = Physics.SphereCastAll(pos.transform.position, sizeZoneDamage, Vector3.forward, sizeZoneDamage);
+        _hits = Physics.SphereCastAll(pos.transform.position, _view._stats._distanceSkill, Vector3.forward, _view._stats._distanceSkill);
         foreach (var I in _hits)
         {
             if (I.collider.gameObject.GetComponent<View>() && I.collider.gameObject.GetComponent<View>()!=_view)
@@ -22,7 +17,7 @@ public class DamageDiller : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(pos.transform.position, sizeZoneDamage);
+        Gizmos.color = new Color(1f,0.1f,0.1f,0.5f);
+        Gizmos.DrawSphere(pos.transform.position, _view._stats._distanceSkill);
     }
 }

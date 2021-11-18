@@ -14,4 +14,6 @@ public class Stats : ScriptableObject
    public float damage;
    public float _coolDown;
    public float _distanceSkill;
+   public float _delayPatrol;
+   public TypeAttack _TypeAttack;
 }

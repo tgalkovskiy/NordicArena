@@ -19,4 +19,6 @@ MonoBehaviour:
   _armor: 7
   damage: 0
   _coolDown: 1
-  _distanceSkill: 3
+  _distanceSkill: 1
+  _delayPatrol: 0
+  _TypeAttack: 0

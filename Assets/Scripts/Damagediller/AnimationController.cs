@@ -16,11 +16,9 @@ public class AnimationController : MonoBehaviour
     public ParticleSystem _hit;
     private Animator _animator;
     private bool _isWeapon = false;
-    private DamageDiller _damageDiller;
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _damageDiller = GetComponent<DamageDiller>();
     }
 
     public void MoveAnimation(float velocity)
@@ -62,8 +60,7 @@ public class AnimationController : MonoBehaviour
     IEnumerator ExecuteCombat(string name)
     {
         _animator.SetTrigger(name);
-        yield return new WaitForSeconds(1.2f);
-        _damageDiller.Damage();
+        yield return null;
     }
     IEnumerator ExecuteWeapon()
     {

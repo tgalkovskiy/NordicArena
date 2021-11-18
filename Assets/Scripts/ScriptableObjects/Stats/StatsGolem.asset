@@ -20,3 +20,5 @@ MonoBehaviour:
   damage: 0
   _coolDown: 5
   _distanceSkill: 5
+  _delayPatrol: 5
+  _TypeAttack: 0

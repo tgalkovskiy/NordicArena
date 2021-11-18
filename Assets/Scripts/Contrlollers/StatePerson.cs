@@ -14,24 +14,12 @@ public class StatePerson : StateControllers
                 if(_state == State.Stay || _state == State.Patrol)
                 {
                     _state = State.Attack;
-                    _actionController.GetPosition(I.collider.gameObject.transform.position, null);
+                    _actionController.GetPosition(I.collider.gameObject.transform.position, I.collider.transform);
                 }
             }
             else
             {
                 _state = State.Patrol;
-            }
-        }
-        if (_state == State.Patrol)
-        {
-            if (_agent.remainingDistance <= _agent.stoppingDistance)
-            {
-                delay -= Time.deltaTime;
-                if (delay <= 0)
-                {
-                    _actionController.GetPosition(pointPatrol[Random.Range(0, pointPatrol.Length)].position, null);
-                    delay = 5f;
-                }
             }
         }
         _actionController.ActionState();

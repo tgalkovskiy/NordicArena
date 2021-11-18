@@ -20,7 +20,7 @@ public class InputController : StateControllers
     private void Start()
     {
         _cameraControllers = new CameraControllers(_playerView._cinemachine);
-        _actionController = new ActionController(_agent, this, _animationController, transform, _playerView);
+        _actionController = new ActionController(this);
     }
     
     private void Update()
@@ -70,17 +70,14 @@ public class InputController : StateControllers
             }
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                _actionController._TypeAttack = TypeAttack.Combat;
                 
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                _actionController._TypeAttack = TypeAttack.Bow;
                 
             }
             if(Input.GetKeyDown(KeyCode.Alpha3))
             {
-                _actionController._TypeAttack = TypeAttack.Magic;
                 
             }
             if (Input.GetKeyDown(KeyCode.I))

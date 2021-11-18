@@ -29,6 +29,6 @@ public class PlayerView : View
     IEnumerator DestroyObj(GameObject gameObject)
     {
         yield return new WaitForSeconds(1);
-        PhotonNetwork.Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

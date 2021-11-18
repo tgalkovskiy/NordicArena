@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: 7311106150079733623}
   - component: {fileID: -6550533834261405199}
   - component: {fileID: 7979689797214815034}
+  - component: {fileID: 6856151127554048718}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -584,11 +585,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animationController: {fileID: 6936508467363236914}
+  _damageDiller: {fileID: 6856151127554048718}
   _state: 0
   pointPatrol: []
+  _view: {fileID: 7311106150079733623}
   _photonView: {fileID: 0}
   _agent: {fileID: 0}
-  delay: 1
 --- !u!114 &7311106150079733623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,6 +635,20 @@ MonoBehaviour:
   _defCursor: {fileID: 2800000, guid: 87d28997275f30943a4bf1cdc156bb73, type: 3}
   _attackCursor: {fileID: 2800000, guid: 24d21e256b498a944a00e2527ed7618c, type: 3}
   _takeCursor: {fileID: 2800000, guid: 0f45821c9378469498c0044ff9068ea2, type: 3}
+--- !u!114 &6856151127554048718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492303504058602230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a73e9246942a3341a063961e2792293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pos: {fileID: 3230753692683856920}
+  _view: {fileID: 7311106150079733623}
 --- !u!1 &1308247764976814257
 GameObject:
   m_ObjectHideFlags: 0
@@ -6749,7 +6765,8 @@ PrefabInstance:
       propertyPath: sizeZoneDamage
       value: 1.25
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8968701192278733451, guid: 906cc1997e65aad4fb8ea55a2ca52b08, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 906cc1997e65aad4fb8ea55a2ca52b08, type: 3}
 --- !u!114 &6936508467363236914 stripped
 MonoBehaviour:
