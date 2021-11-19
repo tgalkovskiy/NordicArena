@@ -25,24 +25,25 @@ public class AnimationController : MonoBehaviour
     {
         _animator.SetFloat("Z", velocity);
     }
-    public void AttackVariant(TypeAttack typeAttack)
+    public void AnimationState(StateControllers _controllers)
     {
-        switch (typeAttack)
+        if(_controllers._state == State.Attack)
         {
-            case TypeAttack.Combat:
-                StartCoroutine(ExecuteCombat("Hit"));
-                break;
-            case TypeAttack.Bow:
-                StartCoroutine(ExecuteCombat("HitBow"));
-                break;
-            case TypeAttack.Magic:
-                StartCoroutine(ExecuteCombat("HitMagic"));
-                break;
+            switch (_controllers._view._stats._TypeAttack)
+            {
+                case TypeAttack.Combat:
+                    StartCoroutine(ExecuteAnimation("Hit", _controllers )); break;
+                case TypeAttack.Bow:
+                    StartCoroutine(ExecuteAnimation("HitBow", _controllers)); break;
+                case TypeAttack.Magic:
+                    StartCoroutine(ExecuteAnimation("HitMagic", _controllers)); break;
+            }
         }
-    }
-    public void TakeItem()
-    {
-        _animator.SetTrigger("Take");
+        if (_controllers._state == State.Take)
+        {
+            StartCoroutine(ExecuteAnimation("Take", _controllers));
+        }
+        
     }
     public void ShowUnShowWeapon()
     {
@@ -57,10 +58,11 @@ public class AnimationController : MonoBehaviour
         StartCoroutine(ExecuteWeapon());
     }
     
-    IEnumerator ExecuteCombat(string name)
+    IEnumerator ExecuteAnimation(string name, StateControllers _controllers)
     {
+        _controllers._state = State.Stay;
         _animator.SetTrigger(name);
-        yield return null;
+        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length/2);
     }
     IEnumerator ExecuteWeapon()
     {
@@ -68,7 +70,6 @@ public class AnimationController : MonoBehaviour
         _weapon.SetActive(!_isWeapon);
         _isWeapon = !_isWeapon;
     }
-
     IEnumerator ExecuteSplash()
     {
         yield return new WaitForSeconds(0.3f);

@@ -25,10 +25,9 @@ public class PlayerView : View
             StartCoroutine(DestroyObj(gameObject));
         }
     }
-
     IEnumerator DestroyObj(GameObject gameObject)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         Destroy(gameObject);
     }
 }

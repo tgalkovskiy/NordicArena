@@ -12,10 +12,9 @@ public class InputController : StateControllers
     private void Awake()
     {
         _mainCamera = Camera.main;
+        _playerView = GetComponent<PlayerView>();
         _agent = GetComponent<NavMeshAgent>();
         _photonView = GetComponent<PhotonView>();
-        _playerView = GetComponent<PlayerView>();
-        
     }
     private void Start()
     {

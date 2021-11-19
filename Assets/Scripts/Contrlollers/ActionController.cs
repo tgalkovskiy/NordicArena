@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public  class ActionController
+public class ActionController
 {
      private Stats _stats;
      private NavMeshAgent _agent;
@@ -63,21 +63,21 @@ public  class ActionController
                if (_stateControllers._state == State.Attack && _cooldown <= 0)
                {
                     Rotation(_targetObj);
-                    _animationController.AttackVariant(_stats._TypeAttack);
-                    _stateControllers._state = State.Stay;
+                    _stateControllers._damageDiller.Damage();
                     _cooldown = _stats._coolDown;
+                    _animationController.AnimationState(_stateControllers);
                }
                if(_stateControllers._state == State.Take)
                {
                     Rotation(_targetObj);
-                    _animationController.TakeItem();
                     _stateControllers.transform.GetComponent<PlayerView>().SetDataCell(_targetObj.GetComponent<DataObj>()._Data, _targetObj.gameObject);
-                    _stateControllers._state = State.Stay;
+                    _animationController.AnimationState(_stateControllers);
                }
                if(_stateControllers._state == State.Patrol && _delay <= 0 && _pointPatrol.Length>0)
                {
                     GetPosition(_pointPatrol[Random.Range(0, _pointPatrol.Length)].position, null);
                     _delay = _stats._delayPatrol;
+                    _animationController.AnimationState(_stateControllers);
                }
           }
           else if (_agent.remainingDistance >= 20)
