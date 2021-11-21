@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
+
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class View : MonoBehaviourPunCallbacks
 {
@@ -12,12 +8,13 @@ public class View : MonoBehaviourPunCallbacks
     public Stats _stats;
     public Presenter _presenter;
     public PhotonView _photonView;
-
+    public StateControllers _State;
     private void Awake()
     {
         Application.targetFrameRate = 90;
         _photonView = GetComponent<PhotonView>();
         _presenter = new Presenter(this);
+        _State = GetComponent<StateControllers>();
         if (_statsUI._hpText != null)
         {
             _statsUI._hpText.text = $"{_stats._hpMax} / {_stats._hpMax}";
@@ -35,5 +32,9 @@ public class View : MonoBehaviourPunCallbacks
         {
             _statsUI._hpText.text = $"{hp}/{_stats._hpMax}";
         }
+    }
+    public void Die()
+    {
+       _State._actionController.Die();
     }
 }

@@ -7,18 +7,13 @@ using UnityEngine.VFX.Utility;
 
 public class VFXManager : MonoBehaviour
 {
-    public static VFXManager Instance;
-    private void Awake()
+    [SerializeField] private ParticleSystem[] _vfx; 
+    public void VFXEffect(int index)
     {
-        Instance = this;
-    }
-
-    public void VFXEffect(GameObject VFX, float duration)
-    {
-        StartCoroutine(OnVFX(VFX, duration));
+        _vfx[index].Play();
     }
     
-    IEnumerator OnVFX(GameObject VFX, float duration)
+    /*IEnumerator OnVFX(GameObject VFX, float duration)
     {
         yield return new WaitForSeconds(1);
         VFX.SetActive(true);
@@ -26,7 +21,7 @@ public class VFXManager : MonoBehaviour
         //VFX.SetActive(true);
         yield return new WaitForSeconds(duration);
         VFX.GetComponent<VisualEffect>().SendEvent("OnStop");
-    }
+    }*/
 }
 public abstract class VFXOutputEventTeleportObject : VFXOutputEventAbstractHandler
 {

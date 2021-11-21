@@ -41,9 +41,12 @@ public sealed class ActionController
      }
      public void ActionState()
      {
-          _animationController.MoveAnimation(_agent.velocity.magnitude);
-          _cooldown -= Time.deltaTime;
-          ExecuteAction();
+          if(_stateControllers._state != State.Die)
+          {
+              _animationController.MoveAnimation(_agent.velocity.magnitude);
+              _cooldown -= Time.deltaTime;
+              ExecuteAction(); 
+          }
      }
     
      private void ExecuteAction()
@@ -90,7 +93,7 @@ public sealed class ActionController
      {
           Rotation();
           _animationController.AnimationState(_stateControllers);
-          _stateControllers._damageDiller.Damage(_stats.damage);
+          _stateControllers._damageDiller.Damage(_stats);
           _cooldown = _stats._coolDown;
      }
      
@@ -99,5 +102,11 @@ public sealed class ActionController
           if (_targetObj == null) return;
           var relativePos = _targetObj.position - _player.position;
           _player.rotation = Quaternion.LookRotation(relativePos);
+     }
+
+     public void Die()
+     {
+          _stateControllers._state = State.Die;
+          _animationController.AnimationState(_stateControllers);
      }
 }

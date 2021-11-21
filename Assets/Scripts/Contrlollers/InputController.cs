@@ -23,6 +23,7 @@ public class InputController : StateControllers
         /*if (_photonView.IsMine)
         {*/
             //turn left
+            if(_state == State.Die) return;
             if (Input.GetKey(KeyCode.Q))
             {
                 _cameraControllers.TurnCameraLeft();
@@ -52,7 +53,7 @@ public class InputController : StateControllers
                 if (Physics.Raycast(ray, out _hit, 100))
                 {
                     _state = State.Move;
-                    if (_hit.collider.gameObject.GetComponent<MonstersView>())
+                    if (_hit.collider.gameObject.GetComponent<StateControllers>() && _hit.collider.gameObject.GetComponent<StateControllers>()._state != State.Die)
                     {
                         _state = State.Attack;
                     }

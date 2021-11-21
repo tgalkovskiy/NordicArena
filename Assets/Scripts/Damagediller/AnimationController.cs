@@ -43,6 +43,10 @@ public class AnimationController : MonoBehaviour
         {
             StartCoroutine(ExecuteAnimation("Take", _controllers));
         }
+        if (_controllers._state == State.Die)
+        {
+            _animator.SetTrigger("Die");
+        }
         
     }
     public void ShowUnShowWeapon()

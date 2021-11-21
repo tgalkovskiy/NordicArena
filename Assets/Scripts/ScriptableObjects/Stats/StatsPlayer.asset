@@ -16,8 +16,9 @@ MonoBehaviour:
   _hpMax: 100
   _manaNow: 0
   _manaMax: 0
-  _armor: 0
-  damage: 5
+  _armor: 5
+  _damage: 30
+  _delayDamage: 0.3
   _coolDown: 1
   _distanceSkill: 1
   _delayPatrol: 0

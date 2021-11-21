@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f05565c031bc94ea9cbd9490069230, type: 3}
   m_Name: StatsGolem
   m_EditorClassIdentifier: 
-  _hpNow: 500
+  _hpNow: 10
   _hpMax: 500
   _manaNow: 0
   _manaMax: 0
   _armor: 0
-  damage: 10
+  _damage: 10
+  _delayDamage: 1.2
   _coolDown: 5
   _distanceSkill: 5
   _delayPatrol: 5

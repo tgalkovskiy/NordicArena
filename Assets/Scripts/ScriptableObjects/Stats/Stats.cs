@@ -11,7 +11,8 @@ public class Stats : ScriptableObject
    public float _manaNow;
    public float _manaMax;
    public float _armor;
-   public float damage;
+   public float _damage;
+   public float _delayDamage;
    public float _coolDown;
    public float _distanceSkill;
    public float _delayPatrol;

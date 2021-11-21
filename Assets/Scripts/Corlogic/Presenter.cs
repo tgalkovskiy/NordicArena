@@ -11,6 +11,7 @@ public class Presenter
         _view = view;
         _model = new Model(_view._stats);
         _model._hpUpdated += _view.SetHp;
+        _model.Die += _view.Die;
     }
     public void GetDamage(float damage)
     {
