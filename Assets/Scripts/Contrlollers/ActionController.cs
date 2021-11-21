@@ -1,13 +1,11 @@
 ﻿
 using UnityEngine;
 using UnityEngine.AI;
-
-public class ActionController
+public sealed class ActionController
 {
      private Stats _stats;
      private NavMeshAgent _agent;
      private StateControllers _stateControllers;
-     private PlayerView _playerView;
      private AnimationController _animationController;
      private Transform[] _pointPatrol;
      private Transform _player;
@@ -29,7 +27,7 @@ public class ActionController
      public void GetPosition(Vector3 endPos, Transform targetObj)
      {
           _targetObj = targetObj;
-          switch (_stateControllers._state)
+          switch(_stateControllers._state)
           {
                case State.Move: _agent.stoppingDistance = 1;  _agent.SetDestination(endPos); break;
                case State.Patrol: _agent.SetDestination(endPos); break;
@@ -46,15 +44,8 @@ public class ActionController
           _animationController.MoveAnimation(_agent.velocity.magnitude);
           _cooldown -= Time.deltaTime;
           ExecuteAction();
-          
      }
-     private void Rotation(Transform targetObj)
-     {
-          if (targetObj == null) return;
-          var relativePos = targetObj.position - _player.position;
-          _player.rotation = Quaternion.LookRotation(relativePos);
-
-     }
+    
      private void ExecuteAction()
      {
           if (_agent.remainingDistance <= _agent.stoppingDistance && _agent.velocity.magnitude < 0.1)
@@ -62,27 +53,51 @@ public class ActionController
                _delay -= Time.deltaTime;
                if (_stateControllers._state == State.Attack && _cooldown <= 0)
                {
-                    Rotation(_targetObj);
-                    _stateControllers._damageDiller.Damage();
-                    _cooldown = _stats._coolDown;
-                    _animationController.AnimationState(_stateControllers);
+                    Attack();
                }
                if(_stateControllers._state == State.Take)
                {
-                    Rotation(_targetObj);
-                    _stateControllers.transform.GetComponent<PlayerView>().SetDataCell(_targetObj.GetComponent<DataObj>()._Data, _targetObj.gameObject);
-                    _animationController.AnimationState(_stateControllers);
+                    Take();
                }
-               if(_stateControllers._state == State.Patrol && _delay <= 0 && _pointPatrol.Length>0)
+               if(_stateControllers._state == State.Patrol && _delay <= 0)
                {
-                    GetPosition(_pointPatrol[Random.Range(0, _pointPatrol.Length)].position, null);
-                    _delay = _stats._delayPatrol;
-                    _animationController.AnimationState(_stateControllers);
+                    Patrol();
                }
           }
           else if (_agent.remainingDistance >= 20)
           {
                _stateControllers._state = State.Patrol;
           }
+     }
+
+     private void Patrol()
+     {
+          if(_pointPatrol.Length <= 0) return;
+          _animationController.AnimationState(_stateControllers);
+          GetPosition(_pointPatrol[Random.Range(0, _pointPatrol.Length)].position, null);
+          _delay = _stats._delayPatrol;
+     }
+
+     private void Take()
+     {
+          Rotation();
+          _animationController.AnimationState(_stateControllers);
+          _stateControllers.transform.GetComponent<PlayerView>()
+               .SetDataCell(_targetObj.GetComponent<DataObj>()._Data, _targetObj.gameObject);
+     }
+
+     private void Attack()
+     {
+          Rotation();
+          _animationController.AnimationState(_stateControllers);
+          _stateControllers._damageDiller.Damage();
+          _cooldown = _stats._coolDown;
+     }
+     
+     private void Rotation()
+     {
+          if (_targetObj == null) return;
+          var relativePos = _targetObj.position - _player.position;
+          _player.rotation = Quaternion.LookRotation(relativePos);
      }
 }

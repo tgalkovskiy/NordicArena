@@ -9,15 +9,11 @@ public class InputController : StateControllers
     private Camera _mainCamera;
     private RaycastHit _hit = default;
     private CameraControllers _cameraControllers;
-    private void Awake()
+    
+    private void Start()
     {
         _mainCamera = Camera.main;
         _playerView = GetComponent<PlayerView>();
-        _agent = GetComponent<NavMeshAgent>();
-        _photonView = GetComponent<PhotonView>();
-    }
-    private void Start()
-    {
         _cameraControllers = new CameraControllers(_playerView._cinemachine);
         _actionController = new ActionController(this);
     }

@@ -585,7 +585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animationController: {fileID: 6936508467363236914}
-  _damageDiller: {fileID: 6856151127554048718}
+  _damageDiller: {fileID: 0}
   _state: 0
   pointPatrol: []
   _view: {fileID: 7311106150079733623}
