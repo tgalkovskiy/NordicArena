@@ -90,7 +90,7 @@ public sealed class ActionController
      {
           Rotation();
           _animationController.AnimationState(_stateControllers);
-          _stateControllers._damageDiller.Damage();
+          _stateControllers._damageDiller.Damage(_stats.damage);
           _cooldown = _stats._coolDown;
      }
      
