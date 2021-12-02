@@ -36,7 +36,7 @@ public sealed class ActionController
                     _agent.stoppingDistance = _stats._distanceSkill;
                     _agent.SetDestination(endPos);
                }break;
-               case State.Take: _agent.stoppingDistance = 1;  _agent.SetDestination(endPos); break;
+               case State.Take: _agent.stoppingDistance = 0.5f;  _agent.SetDestination(endPos); break;
           }
      }
      public void ActionState()
