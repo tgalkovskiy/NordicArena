@@ -12,5 +12,6 @@ public enum InventoryEnum
     Tunic,
     Weapon,
     Foot,
-    Gold
+    Gold,
+    Inventory
 }

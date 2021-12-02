@@ -9,10 +9,10 @@ using WebSocketSharp;
 public sealed class UIViewInventory : MonoBehaviour
 {
     public InventoryCell _cellPrefabs;
+    public GameObject _spawnObj;
     public ItemCell DragCell;
     [SerializeField] private GameObject _inventoryPanel = default;
-    [SerializeField] private Transform _inventoryСontainer = default;
-    [SerializeField] private Transform _cellContainer;
+    public Transform _cellContainer;
     [SerializeField] private List<ItemCell> _itemCells = new List<ItemCell>();
     private List<InventoryCell> _cellsInventory = new List<InventoryCell>();
     private bool isActivInventory = false;
@@ -24,38 +24,26 @@ public sealed class UIViewInventory : MonoBehaviour
     }
     public void Init()
     {
-        for (int i = 0; i < _itemCells.Count; i++)
+        foreach (var t in _itemCells)
         {
-            _itemCells[i].Init(this);
+            t.Init(this);
         }
-        CreateCellInventory(44);
     }
     public bool SetCell(CellData cellData)
     {
-        foreach (var cell in _cellsInventory)
-        {
-            if(cell._name.IsNullOrEmpty())
-            {
-                cell.SetParameters(cellData);
-                return true;
-            }
-        }
-        return false;
+        _cellsInventory.Add(CreateCellInventory(cellData));
+        return true;
     }
     public void DeleteInventoryCell()
     {
         Destroy(_cellsInventory[_cellsInventory.Count-1].gameObject);
         _cellsInventory.RemoveAt(_cellsInventory.Count-1);
     }
-    public void CreateCellInventory(int count)
+    private InventoryCell CreateCellInventory(CellData cellData)
     {
-        for (int i = 0; i < count; i++)
-        {
-            _cellsInventory.Add(Instantiate(_cellPrefabs, _cellContainer));
-            _cellsInventory[_cellsInventory.Count-1].Init(_inventoryСontainer, _cellContainer, this);
-            _cellsInventory[_cellsInventory.Count - 1].name = (_cellsInventory.Count - 1).ToString();
-            _cellsInventory[_cellsInventory.Count-1].SetParameters(new CellData(){ Id =_cellsInventory.Count-1, name = string.Empty, description = string.Empty});
-        }
+        var cell = Instantiate(_cellPrefabs, _cellContainer);
+        cell.SetParameters(cellData, this);
+        return cell;
     }
     
     

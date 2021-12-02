@@ -20,6 +20,7 @@ public class Extruder : MonoBehaviour
         _triangles = _mesh.triangles;
     }
     
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -37,9 +38,9 @@ public class Extruder : MonoBehaviour
         var _index0 = _triangles[index * 3 + 0];
         var _index1 = _triangles[index * 3 + 1];
         var _index2 = _triangles[index * 3 + 2];
-        _vertexNew[_index0] += new Vector3(0, Random.Range(-2,2), 0);
-        _vertexNew[_index1] += new Vector3(0, Random.Range(-2,2), 0);
-        _vertexNew[_index2] += new Vector3(0, Random.Range(-2,2), 0);
+        _vertexNew[_index0] += new Vector3(0, -2, 0);
+        _vertexNew[_index1] += new Vector3(0, -3, 0);
+        _vertexNew[_index2] += new Vector3(0, -1, 0);
         _mesh.vertices = _vertexNew;
         _mesh.RecalculateBounds();
         _mesh.RecalculateNormals();

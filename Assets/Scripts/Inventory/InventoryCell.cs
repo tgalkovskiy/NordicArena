@@ -21,19 +21,12 @@ public class InventoryCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public int _count;
     public Image _imageCell;
     public Text _descriptionUI;
-    private Transform _inventoryParent;
-    private Transform _cellParent;
     private CellData _data;
     private UIViewInventory _uiViewInventory;
-    
-    public void Init(Transform _containerInventory, Transform _containerCell, UIViewInventory viewInventory)
+    private GameObject viewSpawnCell;
+    public void SetParameters(CellData cellData, UIViewInventory viewInventory)
     {
-        _inventoryParent = _containerInventory;
-        _cellParent = _containerCell;
         _uiViewInventory = viewInventory;
-    }
-    public void SetParameters(CellData cellData)
-    {
         _data = cellData;
         _id = cellData.Id; 
         _name = cellData.name; 
@@ -68,52 +61,31 @@ public class InventoryCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!_name.IsNullOrEmpty())
-        {
-            transform.position = Input.mousePosition;
-        }
+        viewSpawnCell.transform.position = Input.mousePosition;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!_name.IsNullOrEmpty())
-        {
-            transform.parent = _inventoryParent;
-            transform.GetComponent<Image>().raycastTarget = false;
-        }
+        viewSpawnCell = Instantiate(_uiViewInventory._spawnObj, transform.position, Quaternion.identity, _uiViewInventory.transform);
+        viewSpawnCell.transform.GetChild(0).GetComponent<Image>().sprite = _data.Image;
+        viewSpawnCell.GetComponent<Image>().raycastTarget = false;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(!_name.IsNullOrEmpty())
+        Destroy(viewSpawnCell.gameObject);
+        if (_uiViewInventory.DragCell == null) return;
+        if (_uiViewInventory.DragCell._InventoryEnum == _data.type )
         {
-            if (_uiViewInventory.DragCell !=null && _uiViewInventory.DragCell._InventoryEnum == _data.type)
+            if (_uiViewInventory.DragCell.transform.childCount > 0)
             {
-                transform.parent = _uiViewInventory.DragCell.transform;
+                _uiViewInventory.DragCell.transform.GetChild(0).parent = _uiViewInventory._cellContainer;
             }
-            else
-            {
-                int index = 0;
-                for (int i = 0; i < _cellParent.transform.childCount; i++)
-                {
-                    if (Vector3.Distance(transform.position, _cellParent.GetChild(i).position) <
-                        Vector3.Distance(transform.position, _cellParent.GetChild(index).position))
-                    {
-                        index = i;
-                    }
-                }
-                transform.parent = _cellParent;
-                transform.SetSiblingIndex(index);
-            } 
-            transform.GetComponent<Image>().raycastTarget = true;
-            if (_cellParent.transform.childCount < 44)
-            {
-                _uiViewInventory.CreateCellInventory(1);
-            }
-            if (_cellParent.transform.childCount > 44)
-            {
-                _uiViewInventory.DeleteInventoryCell();
-            }
+            transform.parent = _uiViewInventory.DragCell.transform;
+        }
+        if(_uiViewInventory.DragCell._InventoryEnum == InventoryEnum.Inventory)
+        {
+            transform.parent = _uiViewInventory.DragCell.transform;
         }
     }
 }

@@ -1,18 +1,15 @@
 
-using Photon.Pun;
 using UnityEngine;
 
-public class View : MonoBehaviourPunCallbacks
+public class View : MonoBehaviour
 {
     public UiVievStats _statsUI;
     public Stats _stats;
     public Presenter _presenter;
-    public PhotonView _photonView;
     public StateControllers _State;
     private void Awake()
     {
         Application.targetFrameRate = 90;
-        _photonView = GetComponent<PhotonView>();
         _presenter = new Presenter(this);
         _State = GetComponent<StateControllers>();
         if (_statsUI._hpText != null)
