@@ -1,8 +1,6 @@
 using System.Collections;
 using Cinemachine;
-using Photon.Pun;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerView : View
 {

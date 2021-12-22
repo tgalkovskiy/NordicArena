@@ -1,18 +1,24 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 public class DamageDiller : MonoBehaviour
 {
+    public GameObject prefabBow;
     public Transform pos;
     public View _view;
     private RaycastHit[] _hits;
     public void Damage(Stats _stats)
     {
-        if (_stats._TypeAttack == TypeAttack.Combat)
+        if(_stats._TypeAttack == TypeAttack.Combat)
         {
-            StartCoroutine(CombatAttack(_stats._damage, _stats._delayDamage));
+            StartCoroutine(ICombatAttack(_stats._damage, _stats._delayDamage));
+        }
+        if (_stats._TypeAttack == TypeAttack.Bow)
+        {
+            StartCoroutine(IBowAttack(_stats._damage, _stats._delayDamage));
         }
     }
-    IEnumerator CombatAttack(float damage, float delayDamage)
+    IEnumerator ICombatAttack(float damage, float delayDamage)
     {
         yield return new WaitForSeconds(delayDamage);
         _hits = Physics.SphereCastAll(pos.transform.position, _view._stats._distanceSkill, Vector3.forward, _view._stats._distanceSkill);
@@ -24,6 +30,13 @@ public class DamageDiller : MonoBehaviour
             }
         }
     }
+    IEnumerator IBowAttack(float damage, float delayDamage)
+    {
+        yield return new WaitForSeconds(delayDamage);
+        var Arrow = Instantiate(prefabBow, pos.position + new Vector3(0,1,0), transform.rotation*quaternion.Euler(6.2f,0,0));
+        Arrow.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward*1500);
+    }
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1f,0.1f,0.1f,0.5f);

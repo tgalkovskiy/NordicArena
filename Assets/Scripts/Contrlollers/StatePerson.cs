@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StatePerson : StateControllers
 {
-    private void Update()
+    private void FixedUpdate()
     {
         if(_state == State.Die) return;
         _hits = Physics.SphereCastAll(transform.position, 10, Vector3.forward, 10);
@@ -24,6 +24,5 @@ public class StatePerson : StateControllers
             }
         }
         _actionController.ActionState();
-
     }
 }

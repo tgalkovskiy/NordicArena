@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class StateControllers : MonoBehaviour
 {
     public AnimationController _animationController;
-    public DamageDiller _damageDiller;
+    public DamageDiller damageDiller;
     public State _state;
     public Transform[] pointPatrol;
     public View _view;
@@ -15,7 +15,7 @@ public class StateControllers : MonoBehaviour
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _damageDiller = GetComponent<DamageDiller>();
+        damageDiller = GetComponent<DamageDiller>();
         _view = GetComponent<View>();
     }
     private void Start()

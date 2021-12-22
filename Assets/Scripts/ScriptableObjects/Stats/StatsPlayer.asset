@@ -20,6 +20,6 @@ MonoBehaviour:
   _damage: 30
   _delayDamage: 0.3
   _coolDown: 1
-  _distanceSkill: 1
+  _distanceSkill: 2
   _delayPatrol: 0
   _TypeAttack: 0

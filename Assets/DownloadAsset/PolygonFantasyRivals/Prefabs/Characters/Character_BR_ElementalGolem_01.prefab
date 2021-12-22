@@ -1401,9 +1401,6 @@ GameObject:
   - component: {fileID: 546795369}
   - component: {fileID: 95089309120233660}
   - component: {fileID: 2004252335820612313}
-  - component: {fileID: 546795370}
-  - component: {fileID: 546795371}
-  - component: {fileID: 546795372}
   - component: {fileID: 2962133851341370027}
   - component: {fileID: 9093316907525025993}
   - component: {fileID: 5700761763668457165}
@@ -1473,7 +1470,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.8
+  m_Radius: 0.55
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1.1, z: 0}
@@ -1614,68 +1611,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &546795370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1334977650429898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 0
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 1
-    SynchronizeType: 0
-    Name: Z
-  - Type: 9
-    SynchronizeType: 0
-    Name: Hit
-  m_SynchronizeLayers: []
---- !u!114 &546795371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1334977650429898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
-  m_UseLocal: 1
---- !u!114 &546795372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1334977650429898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 546795370}
-  - {fileID: 546795371}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &2962133851341370027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1703,14 +1638,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animationController: {fileID: 2962133851341370027}
-  _damageDiller: {fileID: 0}
-  _state: 0
+  damageDiller: {fileID: 0}
+  _state: 1
   pointPatrol:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   _view: {fileID: 0}
-  _photonView: {fileID: 0}
   _agent: {fileID: 0}
 --- !u!114 &5700761763668457165
 MonoBehaviour:
@@ -1724,6 +1658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a73e9246942a3341a063961e2792293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabBow: {fileID: 0}
   pos: {fileID: 157668628}
   _view: {fileID: 986676242766915935}
 --- !u!114 &7292538411432514190
@@ -1757,7 +1692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _statsUI: {fileID: 5118520812632367198}
   _stats: {fileID: 11400000, guid: 4e96c8276bce05c41874557a38325448, type: 2}
-  _photonView: {fileID: 0}
+  _State: {fileID: 0}
 --- !u!114 &5118520812632367198
 MonoBehaviour:
   m_ObjectHideFlags: 0

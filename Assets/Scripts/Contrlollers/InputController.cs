@@ -49,19 +49,32 @@ public class InputController : StateControllers
             //getting a position for movement
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out _hit, 100))
+                if (Input.GetKey(KeyCode.LeftControl))
                 {
-                    _state = State.Move;
-                    if (_hit.collider.gameObject.GetComponent<StateControllers>() && _hit.collider.gameObject.GetComponent<StateControllers>()._state != State.Die)
+                    Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out _hit, 100))
                     {
                         _state = State.Attack;
                     }
-                    if (_hit.collider.gameObject.GetComponent<DataObj>())
-                    {
-                        _state = State.Take;
-                    }
-                    _actionController.GetPosition(_hit.point, _hit.collider.transform);
+                    _actionController.GetPosition(_hit.point, null);
+                }
+                else
+                {
+                   Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                   if (Physics.Raycast(ray, out _hit, 100))
+                   {
+                       _state = State.Move;
+                       if (_hit.collider.gameObject.GetComponent<StateControllers>() &&
+                           _hit.collider.gameObject.GetComponent<StateControllers>()._state != State.Die)
+                       {
+                           _state = State.Attack;
+                       }
+                       if (_hit.collider.gameObject.GetComponent<DataObj>())
+                       {
+                           _state = State.Take;
+                       }
+                       _actionController.GetPosition(_hit.point, _hit.collider.transform);
+                   } 
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha1))
