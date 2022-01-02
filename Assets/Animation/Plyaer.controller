@@ -221,10 +221,10 @@ AnimatorStateMachine:
     m_Position: {x: 990, y: -990, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1141099160485145328}
-    m_Position: {x: 510, y: -940, z: 0}
+    m_Position: {x: 510, y: -910, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4667063727735434683}
-    m_Position: {x: 510, y: -880, z: 0}
+    m_Position: {x: 510, y: -850, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4519183586552169556}
     m_Position: {x: 0, y: 0, z: 0}
@@ -239,7 +239,7 @@ AnimatorStateMachine:
     m_Position: {x: 520, y: -1460, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4154835327463242154}
-    m_Position: {x: 284.8683, y: -799.5518, z: 0}
+    m_Position: {x: 130, y: -870, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 5001379807684675579}
@@ -254,8 +254,8 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 160, y: -1020, z: 0}
-  m_EntryPosition: {x: 1430, y: -970, z: 0}
-  m_ExitPosition: {x: 1410, y: -850, z: 0}
+  m_EntryPosition: {x: 1400, y: -1000, z: 0}
+  m_ExitPosition: {x: 1400, y: -930, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 2606712674710688978}
 --- !u!1101 &-6202965809833256752
@@ -762,61 +762,61 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Z
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: OnArm
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Disarm
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Hit
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: kick
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: HitBow
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: HitMagic
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Take
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Die
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

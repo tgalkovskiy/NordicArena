@@ -4,15 +4,15 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Stats", fileName = "Stats")]
 public class Stats : ScriptableObject
 {
-   public float _hpNow;
-   public float _hpMax;
-   public float _manaNow;
-   public float _manaMax;
-   public float _armor;
-   public float _damage;
-   public float _delayDamage;
-   public float _coolDown;
-   public float _distanceSkill;
-   public float _delayPatrol;
-   public TypeAttack _TypeAttack;
+   public float hpNow;
+   public float hpMax;
+   public float manaNow;
+   public float manaMax;
+   public float armor;
+   public float damage;
+   public float delayDamage;
+   public float coolDown;
+   public float distanceSkill;
+   public float delayPatrol;
+   public TypeAttack TypeAttack;
 }

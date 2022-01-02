@@ -6,21 +6,22 @@ public class StateControllers : MonoBehaviour
 {
     public AnimationController _animationController;
     public DamageDiller damageDiller;
-    public State _state;
+    public State state;
+    public ExecuteState executeState;
     public Transform[] pointPatrol;
-    public View _view;
-    public NavMeshAgent _agent;
-    public RaycastHit[] _hits = default;
-    public ActionController _actionController;
+    public View view;
+    public NavMeshAgent agent;
+    public RaycastHit[] hits = default;
+    public ActionController actionController;
     private void Awake()
     {
-        _agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         damageDiller = GetComponent<DamageDiller>();
-        _view = GetComponent<View>();
+        view = GetComponent<View>();
     }
     private void Start()
     {
-        _actionController = new ActionController(this);
+        actionController = new ActionController(this);
     }
 
 

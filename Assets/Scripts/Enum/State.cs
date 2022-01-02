@@ -2,10 +2,19 @@
 
 public enum State 
 {
-    Die,
-    Patrol,
+    Idle,
     Move,
-    Stay,
+    Patrol,
     Take,
-    Attack
+    Attack,
+    Die,
+    Menu,
+    OnOfWeapon,
+    Speak  
+}
+
+public enum ExecuteState
+{
+    NonExecute,
+    Execute
 }

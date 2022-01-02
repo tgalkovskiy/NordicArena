@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f05565c031bc94ea9cbd9490069230, type: 3}
   m_Name: StatsPlayer
   m_EditorClassIdentifier: 
-  _hpNow: 100
-  _hpMax: 100
-  _manaNow: 0
-  _manaMax: 0
-  _armor: 5
-  _damage: 30
-  _delayDamage: 0.3
-  _coolDown: 1
-  _distanceSkill: 2
-  _delayPatrol: 0
-  _TypeAttack: 0
+  hpNow: 99074
+  hpMax: 100
+  manaNow: 100
+  manaMax: 100
+  armor: 5
+  damage: 10
+  delayDamage: 0.3
+  coolDown: 1
+  distanceSkill: 1
+  delayPatrol: 0
+  TypeAttack: 0

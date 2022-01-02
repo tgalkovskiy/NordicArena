@@ -14,7 +14,7 @@ public class View : MonoBehaviour
         _State = GetComponent<StateControllers>();
         if (_statsUI._hpText != null)
         {
-            _statsUI._hpText.text = $"{_stats._hpMax} / {_stats._hpMax}";
+            _statsUI._hpText.text = $"{_stats.hpMax} / {_stats.hpMax}";
         }
     }
 
@@ -24,14 +24,14 @@ public class View : MonoBehaviour
     }
     public void SetHp(float hp)
     {
-        _statsUI._hp.fillAmount =hp/_stats._hpMax;
+        _statsUI._hp.fillAmount =hp/_stats.hpMax;
         if (_statsUI._hpText != null)
         {
-            _statsUI._hpText.text = $"{hp}/{_stats._hpMax}";
+            _statsUI._hpText.text = $"{hp}/{_stats.hpMax}";
         }
     }
     public void Die()
     {
-       _State._actionController.Die();
+       _State.actionController.Die();
     }
 }

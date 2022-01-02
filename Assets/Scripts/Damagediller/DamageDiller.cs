@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -5,41 +6,49 @@ public class DamageDiller : MonoBehaviour
 {
     public GameObject prefabBow;
     public Transform pos;
-    public View _view;
+    private View view;
     private RaycastHit[] _hits;
-    public void Damage(Stats _stats)
+
+    private void Awake()
     {
-        if(_stats._TypeAttack == TypeAttack.Combat)
+        view = GetComponent<View>();
+    }
+
+    public void SetDamage(Stats stats)
+    {
+        switch(stats.TypeAttack)
         {
-            StartCoroutine(ICombatAttack(_stats._damage, _stats._delayDamage));
-        }
-        if (_stats._TypeAttack == TypeAttack.Bow)
-        {
-            StartCoroutine(IBowAttack(_stats._damage, _stats._delayDamage));
+            case TypeAttack.Combat: StartCoroutine(ICombatAttack(stats)); break;
+            case TypeAttack.Bow: StartCoroutine(IBowAttack(stats)); break;
+            case TypeAttack.Magic: StartCoroutine(IMagicAttack(stats)); break;
         }
     }
-    IEnumerator ICombatAttack(float damage, float delayDamage)
+    IEnumerator ICombatAttack(Stats stats)
     {
-        yield return new WaitForSeconds(delayDamage);
-        _hits = Physics.SphereCastAll(pos.transform.position, _view._stats._distanceSkill, Vector3.forward, _view._stats._distanceSkill);
+        yield return new WaitForSeconds(stats.delayDamage);
+        _hits = Physics.SphereCastAll(pos.transform.position, view._stats.distanceSkill, Vector3.forward, view._stats.distanceSkill);
         foreach (var I in _hits)
         {
-            if (I.collider.gameObject.GetComponent<View>() && I.collider.gameObject.GetComponent<View>()!=_view)
+            if (I.collider.gameObject.GetComponent<View>() && I.collider.gameObject.GetComponent<View>()!=view)
             {
-                I.collider.gameObject.GetComponent<View>().GetDamage(damage);
+                I.collider.gameObject.GetComponent<View>().GetDamage(stats.damage);
             }
         }
     }
-    IEnumerator IBowAttack(float damage, float delayDamage)
+    IEnumerator IBowAttack(Stats stats)
     {
-        yield return new WaitForSeconds(delayDamage);
+        yield return new WaitForSeconds(stats.delayDamage);
         var Arrow = Instantiate(prefabBow, pos.position + new Vector3(0,1,0), transform.rotation*quaternion.Euler(6.2f,0,0));
         Arrow.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward*1500);
     }
-    
-    private void OnDrawGizmos()
+
+    IEnumerator IMagicAttack(Stats stats)
+    {
+        yield return new WaitForSeconds(stats.delayDamage);
+    }
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1f,0.1f,0.1f,0.5f);
-        Gizmos.DrawSphere(pos.transform.position, _view._stats._distanceSkill);
-    }
+        Gizmos.DrawSphere(pos.transform.position, view._stats.distanceSkill);
+    }*/
 }

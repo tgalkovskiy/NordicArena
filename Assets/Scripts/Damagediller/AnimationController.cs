@@ -1,8 +1,6 @@
-using System;
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public enum TypeAttack
 {
@@ -13,70 +11,64 @@ public enum TypeAttack
 public class AnimationController : MonoBehaviour
 {
     public GameObject _weapon;
-    public ParticleSystem _hit;
-    private Animator _animator;
+    private Animator animator;
     private bool _isWeapon = false;
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
-
     public void MoveAnimation(float velocity)
     {
-        _animator.SetFloat("Z", velocity);
+        animator.SetFloat("Z", velocity);
     }
-    public void AnimationState(StateControllers _controllers)
+    public void AnimationState(StateControllers controllers)
     {
-        if(_controllers._state == State.Attack)
+        if(controllers.state == State.Attack)
         {
-            switch (_controllers._view._stats._TypeAttack)
+            switch (controllers.view._stats.TypeAttack)
             {
                 case TypeAttack.Combat:
-                    StartCoroutine(ExecuteAnimation("Hit", _controllers )); break;
+                    StartCoroutine(ExecuteAnimation("Hit", controllers )); break;
                 case TypeAttack.Bow:
-                    StartCoroutine(ExecuteAnimation("HitBow", _controllers)); break;
+                    StartCoroutine(ExecuteAnimation("HitBow", controllers)); break;
                 case TypeAttack.Magic:
-                    StartCoroutine(ExecuteAnimation("HitMagic", _controllers)); break;
+                    StartCoroutine(ExecuteAnimation("HitMagic", controllers)); break;
             }
         }
-        if (_controllers._state == State.Take)
+        if (controllers.state == State.Take)
         {
-            StartCoroutine(ExecuteAnimation("Take", _controllers));
+            StartCoroutine(ExecuteAnimation("Take", controllers));
         }
-        if (_controllers._state == State.Die)
+        if (controllers.state == State.OnOfWeapon)
         {
-            _animator.SetTrigger("Die");
+            ShowUnShowWeapon(controllers, _weapon);
         }
-        
+        if (controllers.state == State.Die)
+        {
+            animator.SetTrigger("Die");
+        }
     }
-    public void ShowUnShowWeapon()
+    public void ShowUnShowWeapon(StateControllers controllers, GameObject gameObject)
     {
-        if (!_isWeapon)
-        {
-            _animator.SetTrigger("OnArm");
-        }
-        else
-        {
-            _animator.SetTrigger("Disarm");
-        }
-        StartCoroutine(ExecuteWeapon());
+        StartCoroutine(ExecuteAnimation(!_isWeapon ? "OnArm" : "Disarm", controllers, gameObject));
     }
     
-    IEnumerator ExecuteAnimation(string name, StateControllers _controllers)
+    IEnumerator ExecuteAnimation(string name, StateControllers controllers)
     {
-        _controllers._state = State.Stay;
-        _animator.SetTrigger(name);
-        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length/2);
+        controllers.executeState = ExecuteState.Execute;
+        animator.SetTrigger(name);
+        yield return new WaitForSeconds(controllers.view._stats.coolDown);
+        controllers.state = State.Idle;
+        controllers.executeState = ExecuteState.NonExecute;
     }
-    IEnumerator ExecuteWeapon()
+    IEnumerator ExecuteAnimation(string name, StateControllers controllers, GameObject gameObject)
     {
-        yield return new WaitForSeconds(1f);
+        controllers.executeState = ExecuteState.Execute;
+        animator.SetTrigger(name);
         _weapon.SetActive(!_isWeapon);
         _isWeapon = !_isWeapon;
-    }
-    IEnumerator ExecuteSplash()
-    {
-        yield return new WaitForSeconds(0.3f);
-        _hit.Play();
+        yield return new WaitForSeconds(1);
+        controllers.state = State.Idle;
+        controllers.executeState = ExecuteState.NonExecute;
     }
 }

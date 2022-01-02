@@ -12,9 +12,9 @@ public class Model
     }
     public void GetDamage(float damage)
     {
-        _stats._hpNow -= damage - _stats._armor;
-        _hpUpdated?.Invoke(_stats._hpNow);
-        if (_stats._hpNow <= 0)
+        _stats.hpNow -= damage - _stats.armor;
+        _hpUpdated?.Invoke(_stats.hpNow);
+        if (_stats.hpNow <= 0)
         {
             Die?.Invoke();
         }
