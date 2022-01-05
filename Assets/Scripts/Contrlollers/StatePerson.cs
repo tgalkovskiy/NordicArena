@@ -13,7 +13,7 @@ public class StatePerson : StateControllers
             {
                 if(state != State.Idle && state != State.Patrol)continue;
                 state = State.Attack;
-                actionController.GetPosition(I.collider.gameObject.transform.position, I.collider.transform);
+                actionController.GetPositionMove(I.collider.transform.position, I.transform);
             }
             else
             {

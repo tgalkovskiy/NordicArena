@@ -6,7 +6,7 @@ public class InputController : StateControllers
     private PlayerView _playerView;
     public Camera mainCamera;
     public Camera miniMapCamera;
-    private RaycastHit _hit = default;
+    private RaycastHit hit;
     private CameraControllers _cameraControllers;
     public GameObject metca;
     private GameObject posMove;
@@ -49,28 +49,28 @@ public class InputController : StateControllers
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out _hit, 100))
+            if (Physics.Raycast(ray, out hit, 100))
             {
                 if (Input.GetKey(KeyCode.LeftControl))
                 {
-                     state = State.Attack;
-                     actionController.Rotation(_hit.point);
+                    state = State.Attack;
                 }
                 else
                 {
                     state = State.Move;
-                    posMove.transform.position = _hit.point + metca.transform.position;
-                    if (_hit.collider.gameObject.GetComponent<StateControllers>() &&
-                        _hit.collider.gameObject.GetComponent<StateControllers>().state != State.Die)
+                    posMove.transform.position = hit.point + metca.transform.position;
+                    if (hit.collider.gameObject.GetComponent<StateControllers>() &&
+                        hit.collider.gameObject.GetComponent<StateControllers>().state != State.Die)
                     {
                         state = State.Attack;
                     }
-                    if (_hit.collider.gameObject.GetComponent<DataObj>())
+                    if (hit.collider.gameObject.GetComponent<DataObj>())
                     {
                         state = State.Take;
                     }
-                    actionController.GetPosition(_hit.point, _hit.collider.transform);
+                    actionController.GetPositionMove(hit.point, hit.collider.transform);
                 }
+                actionController.GetTarget(hit);
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
