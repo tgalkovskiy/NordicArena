@@ -27,7 +27,7 @@ public sealed class ActionController
                     stateControllers.agent.stoppingDistance = stats.distanceSkill;
                     stateControllers.agent.SetDestination(endPos);
                }break;
-               case State.Take: stateControllers.agent.stoppingDistance = 0.5f;  stateControllers.agent.SetDestination(endPos); break;
+               case State.Take: stateControllers.agent.stoppingDistance = 1f;  stateControllers.agent.SetDestination(endPos); break;
           }
      }
      public void ActionState()
@@ -43,7 +43,7 @@ public sealed class ActionController
           {
                switch(stateControllers.state)
                {
-                    case State.Attack when stateControllers.executeState != ExecuteState.Execute : Attack(); break;
+                    case State.Attack when stateControllers.executeState != ExecuteState.Execute: Attack(); break;
                     case State.Take when stateControllers.executeState != ExecuteState.Execute: Take(); break;
                     case State.Patrol when _delay<=0: Patrol(); break;
                     case State.Menu: break;
@@ -63,7 +63,7 @@ public sealed class ActionController
           {
                stateControllers._animationController.AnimationState(stateControllers);
                GetPosition(pointPatrol[Random.Range(0, pointPatrol.Length)].position, null);
-          }).Kill();
+          });
      }
 
      private void Take()

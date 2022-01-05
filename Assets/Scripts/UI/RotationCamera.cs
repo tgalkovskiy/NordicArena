@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class RotationCamera : MonoBehaviour
 {
-    private Camera gameCamera;
+    public Camera gameCamera;
 
     private void Awake()
     {
-        gameCamera = Camera.main;
+        //gameCamera = Camera.main;
     }
 
     private void FixedUpdate()

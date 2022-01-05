@@ -16,7 +16,7 @@ public class DataObj : MonoBehaviourPunCallbacks
     {
         _Data.name = _name;
         _Data.description = _description;
-        _Data.Image = _ImageItem;
+        _Data.imageItem = _ImageItem;
         _Data.type = _type;
     }
 }

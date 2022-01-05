@@ -5,21 +5,21 @@ using UnityEngine.EventSystems;
 
 public class ItemCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    private UIViewInventory _uiViewInventory;
-    public InventoryEnum _InventoryEnum;
+    private UIViewInventory uiViewInventory;
+    public InventoryEnum inventoryEnum;
     
     public void Init(UIViewInventory viewInventory)
     {
-        _uiViewInventory = viewInventory;
+        //uiViewInventory = viewInventory;
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _uiViewInventory.DragCell = this;
+        //uiViewInventory.DragCell = this;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _uiViewInventory.DragCell = null;
+        //uiViewInventory.DragCell = null;
     }
     
 }

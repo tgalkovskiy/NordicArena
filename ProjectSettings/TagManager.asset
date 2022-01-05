@@ -12,10 +12,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Label
   - Water
   - UI
-  - 
+  - Character
   - 
   - 
   - 

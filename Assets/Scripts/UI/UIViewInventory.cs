@@ -10,11 +10,11 @@ public sealed class UIViewInventory : MonoBehaviour
 {
     public InventoryCell _cellPrefabs;
     public GameObject _spawnObj;
-    public ItemCell DragCell;
+    public InventoryCell DragCell;
     [SerializeField] private GameObject _inventoryPanel = default;
     public Transform _cellContainer;
-    [SerializeField] private List<ItemCell> _itemCells = new List<ItemCell>();
-    private List<InventoryCell> _cellsInventory = new List<InventoryCell>();
+    [SerializeField] private List<InventoryCell> itemCells = new List<InventoryCell>();
+    [SerializeField] private List<InventoryCell> cellsInventory = new List<InventoryCell>();
     private bool isActivInventory = false;
     
     public void ShowInventoryPanel()
@@ -24,27 +24,36 @@ public sealed class UIViewInventory : MonoBehaviour
     }
     public void Init()
     {
-        foreach (var t in _itemCells)
+        foreach (var t in cellsInventory)
+        {
+            t.Init(this);
+        }
+        foreach (var t in itemCells)
         {
             t.Init(this);
         }
     }
     public bool SetCell(CellData cellData)
     {
-        _cellsInventory.Add(CreateCellInventory(cellData));
+        foreach (var t in cellsInventory.Where(t => t.nameItem.IsNullOrEmpty()))
+        {
+            t.SetDataCell(cellData);
+            break;
+        }
+        //cellsInventory.Add(CreateCellInventory(cellData));
         return true;
     }
-    public void DeleteInventoryCell()
+    /*public void DeleteInventoryCell()
     {
-        Destroy(_cellsInventory[_cellsInventory.Count-1].gameObject);
-        _cellsInventory.RemoveAt(_cellsInventory.Count-1);
+        Destroy(cellsInventory[cellsInventory.Count-1].gameObject);
+        cellsInventory.RemoveAt(cellsInventory.Count-1);
     }
     private InventoryCell CreateCellInventory(CellData cellData)
     {
         var cell = Instantiate(_cellPrefabs, _cellContainer);
         cell.SetParameters(cellData, this);
         return cell;
-    }
+    }*/
     
     
 }

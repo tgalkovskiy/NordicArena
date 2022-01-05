@@ -90,10 +90,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37dee12276b8ab74d829f2a4d4253dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  _count: 0
-  _imageCell: {fileID: 2822015736162315239}
-  _descriptionUI: {fileID: 4860454730625797907}
+  inventoryEnum: 0
+  nameItem: 
+  imageCell: {fileID: 2822015736162315239}
+  defaultImageCell: {fileID: 21300000, guid: 4f033cdd2b09f9a43b139729d09d002c, type: 3}
+  description: {fileID: 4860454730625797907}
 --- !u!1 &8781740001561531156
 GameObject:
   m_ObjectHideFlags: 0

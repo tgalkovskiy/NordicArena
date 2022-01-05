@@ -13,10 +13,10 @@ public class LobySpawner : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        var player = Instantiate(_prefab, new Vector3(Random.Range(-1, 1), 1, Random.Range(-1, 1)), Quaternion.identity);
-        player.GetComponent<PlayerView>()._cinemachine = cinemachine;
-        cinemachine.Follow = player.transform;
-        cinemachine.LookAt = player.transform;
+        //var player = Instantiate(_prefab, new Vector3(Random.Range(-1, 1), 1, Random.Range(-1, 1)), Quaternion.identity);
+        //player.GetComponent<PlayerView>()._cinemachine = cinemachine;
+        //cinemachine.Follow = player.transform;
+        //cinemachine.LookAt = player.transform;
     }
     public override void OnJoinedRoom()
     {

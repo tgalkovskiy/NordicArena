@@ -4,16 +4,16 @@ using UnityEngine;
 public class InputController : StateControllers
 {
     private PlayerView _playerView;
-    private Camera _mainCamera;
+    public Camera mainCamera;
+    public Camera miniMapCamera;
     private RaycastHit _hit = default;
     private CameraControllers _cameraControllers;
     public GameObject metca;
     private GameObject posMove;
     private void Start()
     {
-        _mainCamera = Camera.main;
         _playerView = GetComponent<PlayerView>();
-        _cameraControllers = new CameraControllers(_playerView._cinemachine);
+        _cameraControllers = new CameraControllers(_playerView._cinemachine, miniMapCamera);
         actionController = new ActionController(this);
         posMove = Instantiate(metca,metca.transform.position, metca.transform.rotation);
     }
@@ -48,7 +48,7 @@ public class InputController : StateControllers
         //getting a position for movement
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out _hit, 100))
             {
                 if (Input.GetKey(KeyCode.LeftControl))

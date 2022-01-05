@@ -1,4 +1,4 @@
-using System;
+
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -29,7 +29,7 @@ public class DamageDiller : MonoBehaviour
         _hits = Physics.SphereCastAll(pos.transform.position, view._stats.distanceSkill, Vector3.forward, view._stats.distanceSkill);
         foreach (var I in _hits)
         {
-            if (I.collider.gameObject.GetComponent<View>() && I.collider.gameObject.GetComponent<View>()!=view)
+            if(I.collider.gameObject.GetComponent<View>() && I.collider.gameObject.GetComponent<View>()!=view)
             {
                 I.collider.gameObject.GetComponent<View>().GetDamage(stats.damage);
             }
@@ -46,9 +46,4 @@ public class DamageDiller : MonoBehaviour
     {
         yield return new WaitForSeconds(stats.delayDamage);
     }
-    /*private void OnDrawGizmos()
-    {
-        Gizmos.color = new Color(1f,0.1f,0.1f,0.5f);
-        Gizmos.DrawSphere(pos.transform.position, view._stats.distanceSkill);
-    }*/
 }
