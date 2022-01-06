@@ -23,7 +23,7 @@ public class AnimationController : MonoBehaviour
     }
     public void AnimationState(StateControllers controllers)
     {
-        if(controllers.state == State.Attack)
+        if(controllers.state == State.Attack || controllers.state == State.AttackToStay)
         {
             switch (controllers.view._stats.TypeAttack)
             {

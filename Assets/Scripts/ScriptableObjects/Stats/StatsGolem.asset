@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f05565c031bc94ea9cbd9490069230, type: 3}
   m_Name: StatsGolem
   m_EditorClassIdentifier: 
-  hpNow: 380
+  hpNow: 500
   hpMax: 500
   manaNow: 0
   manaMax: 0

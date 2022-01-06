@@ -7,6 +7,7 @@ public enum State
     Patrol,
     Take,
     Attack,
+    AttackToStay,
     Die,
     Menu,
     OnOfWeapon,

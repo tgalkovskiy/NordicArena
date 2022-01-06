@@ -29,25 +29,22 @@ public sealed class ActionController
                     stateControllers.agent.stoppingDistance = stats.distanceSkill;
                     stateControllers.agent.SetDestination(endPos);
                }break;
-               case State.Take: stateControllers.agent.stoppingDistance = 1f;  stateControllers.agent.SetDestination(endPos); break;
+               case State.Take: stateControllers.agent.stoppingDistance = 2f;  stateControllers.agent.SetDestination(endPos); break;
           }
      }
      public void GetTarget(RaycastHit targetObj)
-     { 
-          _targetObj = targetObj.transform;
+     {
           pointTarget = targetObj.point;
      }
-
      private bool ChekDistance()
      {
-          //Vector3.Distance(stateControllers.transform.position, pointTarget)
-          return stateControllers.agent.remainingDistance <= stateControllers.agent.stoppingDistance &&
+          return Vector3.Distance(stateControllers.transform.position, pointTarget) <= stateControllers.agent.stoppingDistance &&
                  stateControllers.agent.velocity.magnitude < 0.1;
      }
      private void BaseAction()
      {
           Rotation();
-          //stateControllers.agent.ResetPath();
+          stateControllers.agent.ResetPath();
           stateControllers._animationController.AnimationState(stateControllers);
           stateControllers.executeState = ExecuteState.Execute;
      }
@@ -64,6 +61,7 @@ public sealed class ActionController
           switch(stateControllers.state)
           {
                case State.Attack when stateControllers.executeState != ExecuteState.Execute && ChekDistance(): Attack(); break;
+               case State.AttackToStay when stateControllers.executeState != ExecuteState.Execute: Attack(); break;
                case State.Take when stateControllers.executeState != ExecuteState.Execute && ChekDistance(): Take(); break;
                case State.Patrol when _delay<=0 && ChekDistance(): Patrol(); break;
                case State.Menu: break;
@@ -87,22 +85,15 @@ public sealed class ActionController
 
      private void Take()
      {
-          //Rotation();
-          //stateControllers._animationController.AnimationState(stateControllers);
-          Debug.Log(1);
           BaseAction();
           stateControllers.transform.GetComponent<PlayerView>()
                .SetDataCell(_targetObj.GetComponent<DataObj>()._Data, _targetObj.gameObject);
-          //stateControllers.executeState = ExecuteState.Execute;
      }
 
      private void Attack()
      {
-          //Rotation();
-          //stateControllers._animationController.AnimationState(stateControllers);
           BaseAction();
           stateControllers.damageDiller.SetDamage(stats);
-          //stateControllers.executeState = ExecuteState.Execute;
      }
      
      private void Rotation()
