@@ -54,7 +54,6 @@ public class InputController : StateControllers
                 if (Input.GetKey(KeyCode.LeftControl))
                 {
                     state = State.AttackToStay;
-                    actionController.GetTarget(hit);
                 }
                 else
                 {
@@ -69,8 +68,8 @@ public class InputController : StateControllers
                     {
                         state = State.Take;
                     }
-                    actionController.GetPositionMove(hit.point, hit.collider.transform);
                 }
+                actionController.GetTarget(hit);
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))

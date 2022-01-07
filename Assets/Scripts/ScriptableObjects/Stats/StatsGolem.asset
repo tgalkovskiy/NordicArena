@@ -17,7 +17,7 @@ MonoBehaviour:
   manaNow: 0
   manaMax: 0
   armor: 0
-  damage: 20
+  damage: 5
   delayDamage: 1
   coolDown: 5
   distanceSkill: 5

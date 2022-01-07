@@ -1,4 +1,5 @@
 ﻿
+using System.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
 public sealed class ActionController
@@ -6,40 +7,50 @@ public sealed class ActionController
      private Stats stats;
      private StateControllers stateControllers;
      private Transform[] pointPatrol;
-     private Transform _targetObj;
+     private Transform targetObj;
      private Vector3 pointTarget;
      private float _delay = 0;
-     
+     private bool isPatrol = false;
      public ActionController(StateControllers stateControllers)
      {
           this.stateControllers = stateControllers;
           stats = this.stateControllers.view._stats;
           pointPatrol = this.stateControllers.pointPatrol;
+          targetObj = stateControllers.transform;
      }
-     public void GetPositionMove(Vector3 endPos, Transform targetObj)
+     public void GetTarget(RaycastHit target)
      {
-          _targetObj = targetObj.transform;
-          pointTarget = targetObj.position;
           switch(stateControllers.state)
           {
-               case State.Move: stateControllers.agent.stoppingDistance = 1;  stateControllers.agent.SetDestination(endPos); break;
-               case State.Patrol: stateControllers.agent.SetDestination(endPos); break;
-               case State.Attack: if (Vector3.Distance(stateControllers.transform.position, endPos) > stats.distanceSkill) 
-               {
-                    stateControllers.agent.stoppingDistance = stats.distanceSkill;
-                    stateControllers.agent.SetDestination(endPos);
-               }break;
-               case State.Take: stateControllers.agent.stoppingDistance = 2f;  stateControllers.agent.SetDestination(endPos); break;
+               case State.Move:
+                    stateControllers.agent.stoppingDistance = 1; 
+                    stateControllers.agent.SetDestination(target.point); break;
+               case State.Patrol when !isPatrol:
+                    isPatrol = true;
+                    stateControllers.agent.stoppingDistance = 1;
+                    targetObj = pointPatrol[Random.Range(0, pointPatrol.Length)];
+                    stateControllers.agent.SetDestination(targetObj.position);
+                    break;
+               case State.AttackToStay:
+                    pointTarget = target.point;
+                    break;
+               case State.Attack:
+                    this.targetObj = target.collider.transform;
+                    if (Vector3.Distance(stateControllers.transform.position, target.collider.transform.position) > stats.distanceSkill)
+                    {
+                         stateControllers.agent.stoppingDistance = stats.distanceSkill;
+                         stateControllers.agent.SetDestination(target.collider.transform.position);
+                    }
+                    break;
+               case State.Take: 
+                    this.targetObj = target.transform;
+                    stateControllers.agent.stoppingDistance = 2f;  
+                    stateControllers.agent.SetDestination(target.collider.transform.position); break;
           }
-     }
-     public void GetTarget(RaycastHit targetObj)
-     {
-          pointTarget = targetObj.point;
      }
      private bool ChekDistance()
      {
-          return Vector3.Distance(stateControllers.transform.position, pointTarget) <= stateControllers.agent.stoppingDistance &&
-                 stateControllers.agent.velocity.magnitude < 0.1;
+          return Vector3.Distance(stateControllers.transform.position, targetObj.position) <= stateControllers.agent.stoppingDistance;
      }
      private void BaseAction()
      {
@@ -55,39 +66,39 @@ public sealed class ActionController
           stateControllers._animationController.MoveAnimation(stateControllers.agent.velocity.magnitude);
      }
      
-     
      private void ExecuteAction()
      {
           switch(stateControllers.state)
           {
+               case State.Idle: stateControllers.state = State.Patrol; break;
                case State.Attack when stateControllers.executeState != ExecuteState.Execute && ChekDistance(): Attack(); break;
                case State.AttackToStay when stateControllers.executeState != ExecuteState.Execute: Attack(); break;
                case State.Take when stateControllers.executeState != ExecuteState.Execute && ChekDistance(): Take(); break;
-               case State.Patrol when _delay<=0 && ChekDistance(): Patrol(); break;
+               case State.Patrol when stateControllers.executeState != ExecuteState.Execute && ChekDistance(): Patrol(); break;
                case State.Menu: break;
                case State.OnOfWeapon when stateControllers.executeState != ExecuteState.Execute: OnOfWeapon(); break;
           }
-          if(stateControllers.agent.remainingDistance >= 20)
+          /*if(Vector3.Distance(stateControllers.transform.position, targetObj.position)>=20)
           {
+               Debug.Log("patrol");
                stateControllers.state = State.Patrol;
-          }
+               isPatrol = false;
+          }*/
      }
-     private void Patrol()
+     private async void Patrol()
      {
           if(pointPatrol.Length <= 0) return;
-          _delay = stats.delayPatrol;
-          DOTween.To(() => _delay, x => _delay = x, 0, stats.delayPatrol).OnComplete(()=>
-          {
-               stateControllers._animationController.AnimationState(stateControllers);
-               GetPositionMove(pointPatrol[Random.Range(0, pointPatrol.Length)].position, null);
-          }).Kill();
+          stateControllers.executeState = ExecuteState.Execute;
+          await Task.Delay((int) stats.delayPatrol * 1000);
+          isPatrol = false;
+          stateControllers.executeState = ExecuteState.NonExecute;
      }
 
      private void Take()
      {
           BaseAction();
           stateControllers.transform.GetComponent<PlayerView>()
-               .SetDataCell(_targetObj.GetComponent<DataObj>()._Data, _targetObj.gameObject);
+               .SetDataCell(targetObj.GetComponent<DataObj>()._Data, targetObj.gameObject);
      }
 
      private void Attack()
@@ -98,8 +109,16 @@ public sealed class ActionController
      
      private void Rotation()
      {
-          var relativePos = pointTarget - stateControllers.transform.position;
-          stateControllers.transform.rotation = Quaternion.LookRotation(relativePos);
+          if(stateControllers.state == State.AttackToStay)
+          {
+              var relativePos = pointTarget - stateControllers.transform.position;
+              stateControllers.transform.rotation = Quaternion.LookRotation(relativePos); 
+          }
+          else
+          {
+               var relativePos = targetObj.position - stateControllers.transform.position;
+               stateControllers.transform.rotation = Quaternion.LookRotation(relativePos); 
+          }
      }
 
      private void OnOfWeapon()
