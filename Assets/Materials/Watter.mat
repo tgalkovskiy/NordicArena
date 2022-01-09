@@ -38,8 +38,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_05e27ab0125e470280fa921c896c4bd3:
+        m_Texture: {fileID: 2800000, guid: a1a723fac9a62c049bc4d6eb55044e78, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_326FF0C1:
         m_Texture: {fileID: 2800000, guid: 924818f767e21c04d8a76ddb86c47858, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_4d929db847fb4a8eb21f4973b1a69bf1:
+        m_Texture: {fileID: 2800000, guid: a1a723fac9a62c049bc4d6eb55044e78, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_8A301771:
@@ -105,9 +113,9 @@ Material:
     m_Floats:
     - Vector1_102116EC: 1.22
     - Vector1_1D7105A8: 1.07
-    - Vector1_9BF683C5: 1.44
-    - Vector1_A2131B98: 0.05
-    - Vector1_CFCC9E6C: 0.26
+    - Vector1_9BF683C5: 2
+    - Vector1_A2131B98: 0.1
+    - Vector1_CFCC9E6C: 0.25
     - Vector1_ae2ad8af358144f8997985729836545f: 100
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
@@ -180,9 +188,10 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - Color_C6E13344: {r: 0.05762727, g: 0.3301887, b: 0.2634679, a: 0.28235295}
-    - Color_C814E087: {r: 0.09549664, g: 0.6981132, b: 0.59568757, a: 0.9019608}
+    - Color_C6E13344: {r: 0.058823526, g: 0.26911184, b: 0.28235295, a: 0.64705884}
+    - Color_C814E087: {r: 0.4912907, g: 0.6415094, b: 0.2208971, a: 0.7176471}
     - Vector2_2F3A5E1F: {r: 10, g: 10, b: 10, a: 0}
+    - Vector2_bcbf7aba5564434688bb3aa5479ed209: {r: 1, g: 2, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}

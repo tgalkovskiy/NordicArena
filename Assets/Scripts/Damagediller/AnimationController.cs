@@ -23,9 +23,9 @@ public class AnimationController : MonoBehaviour
     }
     public void AnimationState(StateControllers controllers)
     {
-        if(controllers.state == State.Attack || controllers.state == State.AttackToStay)
+        if(controllers.typeAction == TypeAction.Attack || controllers.typeAction == TypeAction.AttackToStay)
         {
-            switch (controllers.view._stats.TypeAttack)
+            switch (controllers.view.stats.TypeAttack)
             {
                 case TypeAttack.Combat:
                     StartCoroutine(ExecuteAnimation("Hit", controllers )); break;
@@ -35,15 +35,15 @@ public class AnimationController : MonoBehaviour
                     StartCoroutine(ExecuteAnimation("HitMagic", controllers)); break;
             }
         }
-        if (controllers.state == State.Take)
+        if (controllers.typeAction == TypeAction.Take)
         {
             StartCoroutine(ExecuteAnimation("Take", controllers));
         }
-        if (controllers.state == State.OnOfWeapon)
+        if (controllers.typeAction == TypeAction.OnOfWeapon)
         {
             ShowUnShowWeapon(controllers, _weapon);
         }
-        if (controllers.state == State.Die)
+        if (controllers.stateLife == StateLife.Dead)
         {
             animator.SetTrigger("Die");
         }
@@ -57,8 +57,8 @@ public class AnimationController : MonoBehaviour
     {
         controllers.executeState = ExecuteState.Execute;
         animator.SetTrigger(name);
-        yield return new WaitForSeconds(controllers.view._stats.coolDown);
-        controllers.state = State.Idle;
+        yield return new WaitForSeconds(controllers.view.stats.coolDown);
+        controllers.typeAction = TypeAction.Idle;
         controllers.executeState = ExecuteState.NonExecute;
     }
     IEnumerator ExecuteAnimation(string name, StateControllers controllers, GameObject gameObject)
@@ -68,7 +68,7 @@ public class AnimationController : MonoBehaviour
         _weapon.SetActive(!_isWeapon);
         _isWeapon = !_isWeapon;
         yield return new WaitForSeconds(1);
-        controllers.state = State.Idle;
+        controllers.typeAction = TypeAction.Idle;
         controllers.executeState = ExecuteState.NonExecute;
     }
 }

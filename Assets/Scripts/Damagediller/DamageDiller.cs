@@ -26,7 +26,7 @@ public class DamageDiller : MonoBehaviour
     IEnumerator ICombatAttack(Stats stats)
     {
         yield return new WaitForSeconds(stats.delayDamage);
-        _hits = Physics.SphereCastAll(pos.transform.position, view._stats.distanceSkill, Vector3.forward, view._stats.distanceSkill);
+        _hits = Physics.SphereCastAll(pos.transform.position, view.stats.distanceSkill, Vector3.forward, view.stats.distanceSkill);
         foreach (var I in _hits)
         {
             if(I.collider.gameObject.GetComponent<View>() && I.collider.gameObject.GetComponent<View>()!=view)

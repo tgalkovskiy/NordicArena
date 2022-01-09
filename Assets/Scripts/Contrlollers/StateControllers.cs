@@ -4,13 +4,17 @@ using UnityEngine.AI;
 
 public class StateControllers : MonoBehaviour
 {
-    public AnimationController _animationController;
-    public DamageDiller damageDiller;
-    public State state;
+    public Race race;
+    public RelationShip relationShip;
+    public StateLife stateLife;
+    public TypeAction typeAction;
     public ExecuteState executeState;
-    public Transform[] pointPatrol;
-    public View view;
-    public NavMeshAgent agent;
+    [HideInInspector] public AnimationController _animationController;
+    [HideInInspector] public DamageDiller damageDiller;
+    [HideInInspector] public Transform[] pointPatrol;
+    [HideInInspector] public View view;
+    [HideInInspector] public NavMeshAgent agent;
+    [HideInInspector] public VFXManager vfxManager;
     public RaycastHit[] hits = default;
     public ActionController actionController;
     private void Awake()
@@ -18,6 +22,7 @@ public class StateControllers : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         damageDiller = GetComponent<DamageDiller>();
         view = GetComponent<View>();
+        vfxManager = GetComponent<VFXManager>();
     }
     private void Start()
     {

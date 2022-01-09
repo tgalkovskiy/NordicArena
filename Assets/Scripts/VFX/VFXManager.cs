@@ -1,18 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.VFX;
 using UnityEngine.VFX.Utility;
 
 public class VFXManager : MonoBehaviour
 {
+    public ParticleSystem blood;
+
+    public void PlayVFXBlood()
+    {
+        blood.Play();
+    }
+    
     [SerializeField] private ParticleSystem[] _vfx; 
     public void VFXEffect(int index)
     {
         _vfx[index].Play();
     }
-    
     /*IEnumerator OnVFX(GameObject VFX, float duration)
     {
         yield return new WaitForSeconds(1);

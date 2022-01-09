@@ -21,7 +21,7 @@ public class InputController : StateControllers
     private void Update()
     {
         //turn left
-        if (state == State.Die) return;
+        if (stateLife == StateLife.Dead) return;
         if (Input.GetKey(KeyCode.Q))
         {
             _cameraControllers.TurnCameraLeft();
@@ -42,7 +42,7 @@ public class InputController : StateControllers
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            state = State.OnOfWeapon;
+            typeAction = TypeAction.OnOfWeapon;
             
         }
         //getting a position for movement
@@ -53,20 +53,20 @@ public class InputController : StateControllers
             {
                 if (Input.GetKey(KeyCode.LeftControl))
                 {
-                    state = State.AttackToStay;
+                    typeAction = TypeAction.AttackToStay;
                 }
                 else
                 {
-                    state = State.Move;
+                    typeAction = TypeAction.Move;
                     posMove.transform.position = hit.point + metca.transform.position;
                     if (hit.collider.gameObject.GetComponent<StateControllers>() &&
-                        hit.collider.gameObject.GetComponent<StateControllers>().state != State.Die)
+                        hit.collider.gameObject.GetComponent<StateControllers>().stateLife != StateLife.Dead)
                     {
-                        state = State.Attack;
+                        typeAction = TypeAction.Attack;
                     }
                     if (hit.collider.gameObject.GetComponent<DataObj>())
                     {
-                        state = State.Take;
+                        typeAction = TypeAction.Take;
                     }
                 }
                 actionController.GetTarget(hit);

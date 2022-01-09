@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Stats", fileName = "Stats")]
@@ -15,4 +16,5 @@ public class Stats : ScriptableObject
    public float distanceSkill;
    public float delayPatrol;
    public TypeAttack TypeAttack;
+   public List<Race> EnemyRace;
 }

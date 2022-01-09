@@ -4,34 +4,35 @@ using UnityEngine;
 public class View : MonoBehaviour
 {
     public UiVievStats _statsUI;
-    public Stats _stats;
-    public Presenter _presenter;
-    public StateControllers _State;
+    public Stats stats;
+    public Presenter presenter;
+    public StateControllers state;
     private void Awake()
     {
         Application.targetFrameRate = 90;
-        _presenter = new Presenter(this);
-        _State = GetComponent<StateControllers>();
+        presenter = new Presenter(this);
+        state = GetComponent<StateControllers>();
         if (_statsUI._hpText != null)
         {
-            _statsUI._hpText.text = $"{_stats.hpMax} / {_stats.hpMax}";
+            _statsUI._hpText.text = $"{stats.hpMax} / {stats.hpMax}";
         }
     }
 
     public void GetDamage(float damage)
     {
-        _presenter.GetDamage(damage);
+        presenter.GetDamage(damage);
+        state.vfxManager.PlayVFXBlood();
     }
     public void SetHp(float hp)
     {
-        _statsUI._hp.fillAmount =hp/_stats.hpMax;
+        _statsUI._hp.fillAmount =hp/stats.hpMax;
         if (_statsUI._hpText != null)
         {
-            _statsUI._hpText.text = $"{hp}/{_stats.hpMax}";
+            _statsUI._hpText.text = $"{hp}/{stats.hpMax}";
         }
     }
     public void Die()
     {
-       _State.actionController.Die();
+       state.actionController.Die();
     }
 }
