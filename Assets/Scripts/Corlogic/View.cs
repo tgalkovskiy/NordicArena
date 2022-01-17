@@ -1,38 +1,53 @@
 
+using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class View : MonoBehaviour
 {
-    public UiVievStats _statsUI;
+    public UiVievStats statsUI;
+    public StateControllers statePerson;
     public Stats stats;
+    public AnimationController animationController;
+    public DamageDiller damageDiller;
+    public Transform[] pointPatrol;
+    public NavMeshAgent agent;
+    public VFXManager vfxManager;
     public Presenter presenter;
-    public StateControllers state;
     private void Awake()
     {
         Application.targetFrameRate = 90;
+        agent = GetComponent<NavMeshAgent>();
+        damageDiller = GetComponent<DamageDiller>();
+        vfxManager = GetComponent<VFXManager>();
+        statePerson = GetComponent<StateControllers>();
         presenter = new Presenter(this);
-        state = GetComponent<StateControllers>();
-        if (_statsUI._hpText != null)
+        statePerson.InitActionController(this);
+    }
+
+    private void Start()
+    {
+        if (statsUI._hpText != null)
         {
-            _statsUI._hpText.text = $"{stats.hpMax} / {stats.hpMax}";
+            statsUI._hpText.text = $"{stats.hpMax} / {stats.hpMax}";
         }
     }
 
     public void GetDamage(float damage)
     {
         presenter.GetDamage(damage);
-        state.vfxManager.PlayVFXBlood();
+        statePerson.view.vfxManager.PlayVFXBlood();
     }
     public void SetHp(float hp)
     {
-        _statsUI._hp.fillAmount =hp/stats.hpMax;
-        if (_statsUI._hpText != null)
+        statsUI._hp.fillAmount =hp/stats.hpMax;
+        if (statsUI._hpText != null)
         {
-            _statsUI._hpText.text = $"{hp}/{stats.hpMax}";
+            statsUI._hpText.text = $"{hp}/{stats.hpMax}";
         }
     }
     public void Die()
     {
-       state.actionController.Die();
+       statePerson.actionController.Die();
     }
 }

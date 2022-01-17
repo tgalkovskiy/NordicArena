@@ -1,27 +1,24 @@
 
 using UnityEngine;
 
-public class InputController : StateControllers
+public class BehaviourPlayer : MonoBehaviour
 {
-    private PlayerView _playerView;
-    public Camera mainCamera;
-    public Camera miniMapCamera;
+    public PlayerView playerView;
     private RaycastHit hit;
     private CameraControllers _cameraControllers;
-    public GameObject metca;
     private GameObject posMove;
+    private Ray ray;
     private void Start()
     {
-        _playerView = GetComponent<PlayerView>();
-        _cameraControllers = new CameraControllers(_playerView._cinemachine, miniMapCamera);
-        actionController = new ActionController(this);
-        posMove = Instantiate(metca,metca.transform.position, metca.transform.rotation);
+        playerView = GetComponent<PlayerView>();
+        _cameraControllers = new CameraControllers(playerView._cinemachine, playerView.miniMapCamera);
+        posMove = Instantiate(playerView.indicationPosition,playerView.indicationPosition.transform.position, playerView.indicationPosition.transform.rotation);
     }
     
     private void Update()
     {
         //turn left
-        if (stateLife == StateLife.Dead) return;
+        if (playerView.statePerson.stateLife == StateLife.Dead) return;
         if (Input.GetKey(KeyCode.Q))
         {
             _cameraControllers.TurnCameraLeft();
@@ -42,34 +39,34 @@ public class InputController : StateControllers
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            typeAction = TypeAction.OnOfWeapon;
+            playerView.statePerson.typeAction = TypeAction.OnOfWeapon;
             
         }
         //getting a position for movement
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            ray= playerView.mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 100))
             {
                 if (Input.GetKey(KeyCode.LeftControl))
                 {
-                    typeAction = TypeAction.AttackToStay;
+                    playerView.statePerson.typeAction = TypeAction.AttackToStay;
                 }
                 else
                 {
-                    typeAction = TypeAction.Move;
-                    posMove.transform.position = hit.point + metca.transform.position;
+                    playerView.statePerson.typeAction = TypeAction.Move;
+                    posMove.transform.position = hit.point + playerView.indicationPosition.transform.position;
                     if (hit.collider.gameObject.GetComponent<StateControllers>() &&
                         hit.collider.gameObject.GetComponent<StateControllers>().stateLife != StateLife.Dead)
                     {
-                        typeAction = TypeAction.Attack;
+                        playerView.statePerson.typeAction = TypeAction.Attack;
                     }
                     if (hit.collider.gameObject.GetComponent<DataObj>())
                     {
-                        typeAction = TypeAction.Take;
+                        playerView.statePerson.typeAction = TypeAction.Take;
                     }
                 }
-                actionController.GetTarget(hit);
+                playerView.statePerson.actionController.GetTarget(hit);
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -83,9 +80,9 @@ public class InputController : StateControllers
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            _playerView.ShowUiInventory();
+            playerView.ShowUiInventory();
         }
-        actionController.ActionState();
+        playerView.statePerson.actionController.ActionState();
     }
     
 }

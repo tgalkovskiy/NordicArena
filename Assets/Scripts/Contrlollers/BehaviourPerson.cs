@@ -1,29 +1,37 @@
 
+using System;
 using UnityEngine;
 
-public class BehaviourPerson : StateControllers
+public class BehaviourPerson : MonoBehaviour
 {
+    private MonstersView monstersView;
+
+    private void Start()
+    {
+        monstersView = GetComponent<MonstersView>();
+    }
+
     private void Update()
     {
-        if(stateLife == StateLife.Dead) return;
-        hits = Physics.SphereCastAll(transform.position, 10, Vector3.forward, 10);
-        foreach (var I in hits)
+        if(monstersView.statePerson.stateLife == StateLife.Dead) return;
+        monstersView.hits = Physics.SphereCastAll(transform.position, 10, Vector3.forward, 10);
+        foreach (var I in monstersView.hits)
         {
             if(ChekEnemy(I))
             {
-                typeAction = TypeAction.Attack;
+                monstersView.statePerson.typeAction = TypeAction.Attack;
             }
-            actionController.GetTarget(I);
+            monstersView.statePerson.actionController.GetTarget(I);
         }
-        actionController.ActionState();
+        monstersView.statePerson.actionController.ActionState();
     }
 
     private bool ChekEnemy(RaycastHit hit)
     {
-        if(hit.collider.gameObject.GetComponent<InputController>())
+        if(hit.collider.gameObject.GetComponent<PlayerView>())
         {
-            if(hit.collider.gameObject.GetComponent<InputController>().stateLife == StateLife.Dead) return false;
-            else if(hit.collider.gameObject.GetComponent<InputController>().relationShip == relationShip) return false;
+            if(hit.collider.gameObject.GetComponent<PlayerView>().statePerson.stateLife == StateLife.Dead) return false;
+            else if(hit.collider.gameObject.GetComponent<PlayerView>().statePerson.relationShip ==  monstersView.statePerson.relationShip) return false;
             else { return true;}
         }
         else

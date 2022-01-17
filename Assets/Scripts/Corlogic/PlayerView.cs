@@ -6,7 +6,11 @@ public class PlayerView : View
 {
     public UIViewInventory _viewInventory;
     public CinemachineVirtualCamera _cinemachine;
-
+    public Camera mainCamera;
+    public Camera miniMapCamera;
+    public GameObject indicationPosition;
+    
+    
     private void Start()
     {
         _viewInventory.Init();
